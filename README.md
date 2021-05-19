@@ -2,7 +2,7 @@
 
 # Te_HF_Conversion
 
-Conversion of elastic thickness of the lithosphere to planetary heat flow.
+Conversion of the elastic thickness of the lithosphere to the planetary heat flow..
 
 ## Description
 
@@ -12,21 +12,21 @@ Conversion of elastic thickness of the lithosphere to planetary heat flow.
 Heat flow calculations have been benchmarker to various published numbers in the litterature (e.g., [Solomon & Head, 1990](https://agupubs.onlinelibrary.wiley.com/doi/10.1029/JB095iB07p11073). 
 
 ## Methods
-`Thin_shell_matrix` 
+`..` 
 
 ## Example scripts
-`Mars_crust_displacement` A script that demonstrates how to calculate the moho-relief and strains on Mars, as a function of the mean planetary crustal thickness and elastic thickness. The contributions from isostatic crustal root variations and displacement are shown assuming an elastic thickness of the lithosphere. We make use of the inferred displacement to predict the principal horizontal strains and principal angle, which are compared to extensional tectonic features mapped by [Knampeyer et al. (2006)](https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2006JE002708). 
+`..` 
 
 ## How to install and run Displacement_strain_planet
 If you would like to modify the source code, download the Displacement_strain_planet repository and install using pip (or pip3 depending on your installation).
 ```bash
-    git clone https://github.com/AB-Ares/Displacement_strain_planet.git
-    cd Displacement_strain_planet/
+    git clone https://github.com/AB-Ares/Te_HF_Conversion.git
+    cd Te_HF_Conversion/
     pip install .
 ```
 Alternatively, you can install Displacement-strain-planet via pip
 ```bash
-   pip install Displacement-strain-planet
+   pip install Te-HF-Conversion
 ```
 
 ## To run the example scripts
