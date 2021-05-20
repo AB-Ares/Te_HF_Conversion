@@ -510,6 +510,12 @@ def Conversion_Te_HF(
         ax1.axvline(-sig_y)
         ax1.set_xlabel("Sress (Pa)")
         ax1.legend(loc="lower left")
+        ax1.set_title(
+            "Elastic thickness %i (km), mechanical thickness %i (km)\n"
+            % (Te / 1e3, Tm / 1e3)
+            + "crust, mantle, and surface heat flows %.2f, %.2f, %.2f (mW m-2)"
+            % (F_c_best, F_m_best, F_s_best)
+        )
 
         ax2.plot(T_z_best, depth_km)
         ax2.set_xlabel("Temperature (K)")

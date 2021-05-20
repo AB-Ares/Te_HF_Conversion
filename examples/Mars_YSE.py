@@ -1,6 +1,8 @@
 from Te_HF_Conversion import *
+import seaborn as sns
 
-planet = "Mars"
+sns.set_context('notebook')
+
 plot_YSE = True  # Plot yield strength envelope on the fly for each tested heat flow
 plot = True  # Plot the final yield strength envelope and associated temperature profile
 
@@ -26,7 +28,7 @@ k_mantle = 4.0  # thermal conductivity of the mantle (W m−1 K−1)
 sig_y = 10e6  # Bounding stress (Pa)
 H_c = 4.9e-11  # Average volumetric crustal heat production (W kg-1)
 Te = 100e3  # elastic thickness (m)
-Tc = 50e3  # crustal thickness (m)
+Tc = 70e3  # crustal thickness (m)
 K_curv = 1e-7  # plate curvature (m-1)
 eps = 1e-16  # strain rate (s-1)
 
