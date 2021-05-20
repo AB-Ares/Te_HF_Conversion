@@ -6,7 +6,7 @@ Conversion of the elastic thickness of the lithosphere to the planetary heat flo
 
 ## Description
 
-**Te_HF_Conversion** is a simple code that allows to convert the elastic thickness of the lithosphere to planetary heat flow given several input parameters, including crustal thickness, strain rate, or radiogenic heating. The model makes use of the equating bending moment approach of [McNutt (1984)](https://agupubs.onlinelibrary.wiley.com/doi/10.1029/JB089iB13p11180) and has been used in [Broquet et al (2020](https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2019GL086746).
+**Te_HF_Conversion** is a simple code that allows to convert the elastic thickness of the lithosphere to planetary heat flow given several input parameters, including crustal thickness, strain rate, or radiogenic heating. The model makes use of the equating bending moment approach of [McNutt (1984)](https://agupubs.onlinelibrary.wiley.com/doi/10.1029/JB089iB13p11180) and has been used in [Broquet et al (2020)](https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2019GL086746).
 
 ### Benchmarks
 Heat flow calculations have been benchmarked to various studies (e.g., [McNutt, 1984](https://agupubs.onlinelibrary.wiley.com/doi/10.1029/JB089iB13p11180) or [Solomon & Head, 1990](https://agupubs.onlinelibrary.wiley.com/doi/10.1029/JB095iB07p11073). 
@@ -21,7 +21,7 @@ strength envelope and curvature.
 `Mars_YSE`  Determine the surface, crust, and mantle heat flows for a given elastic thickness on Mars assuming a wet or dry rheology for the diabase crust and olivine mantle. Plot the yield strength envelope.
 
 ## How to install and run Te_HF_Conversion
-If you would like to modify the source code, download the Displacement_strain_planet repository and install using pip (or pip3 depending on your installation).
+Download the Te_HF_Conversion repository and install using pip (or pip3 depending on your installation).
 ```bash
     git clone https://github.com/AB-Ares/Te_HF_Conversion.git
     cd Te_HF_Conversion/
