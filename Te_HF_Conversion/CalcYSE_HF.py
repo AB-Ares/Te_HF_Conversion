@@ -183,13 +183,13 @@ def Conversion_Te_HF(
     Parameters
     ----------
     Q_crust : float
-       Activation energy for the crust (kJ mol-1).
+       Activation energy for the crust (J mol-1).
     A_crust : float
        Empirical constant for the crust (Pa-n s-1).
     n_crust : float
        Rheological constant for the crust.
     Q_mantle : float
-       Activation energy for the mantle (kJ mol-1).
+       Activation energy for the mantle (J mol-1).
     A_mantle : float
        Empirical constant for the mantle (Pa-n s-1).
     n_mantle : float
