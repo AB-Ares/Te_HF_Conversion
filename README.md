@@ -17,14 +17,14 @@ Heat flow calculations have been benchmarked to various studies (e.g., [McNutt, 
 ## Example scripts
 `..` 
 
-## How to install and run Displacement_strain_planet
+## How to install and run Te_HF_Conversion
 If you would like to modify the source code, download the Displacement_strain_planet repository and install using pip (or pip3 depending on your installation).
 ```bash
     git clone https://github.com/AB-Ares/Te_HF_Conversion.git
     cd Te_HF_Conversion/
     pip install .
 ```
-Alternatively, you can install Displacement-strain-planet via pip
+Alternatively, you can install Te-HF-Conversion via pip
 ```bash
    pip install Te-HF-Conversion
 ```
@@ -32,7 +32,6 @@ Alternatively, you can install Displacement-strain-planet via pip
 ## To run the example scripts
 ```bash
     cd examples
-    jupyter notebook Run_demo.ipynb
     python Mars_crust_displacement.py 
 ```
 
