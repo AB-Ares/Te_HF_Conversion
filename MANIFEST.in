@@ -1,2 +1,0 @@
-include versioneer.py
-include Te_HF_Conversion/_version.py
