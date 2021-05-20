@@ -118,9 +118,9 @@ def Curv_Moment(
         plt.axvline(-sig_y)
         plt.ylabel("Depth (km)")
         plt.xlabel("Sress (Pa)")
-        plt.legend(loc = 'lower left')
+        plt.legend(loc="lower left")
         plt.gca().invert_yaxis()
-        plt.title("Mantle heat flow %s (mW m-2)" %(HF*1e3))
+        plt.title("Mantle heat flow %s (mW m-2)" % (HF * 1e3))
         plt.show()
 
     return Mx, d_sig_tab1, d_sig_tab2, sigma_ela
@@ -509,7 +509,7 @@ def Conversion_Te_HF(
         ax1.axvline(sig_y, label="Bounding stress")
         ax1.axvline(-sig_y)
         ax1.set_xlabel("Sress (Pa)")
-        ax1.legend(loc = 'lower left')
+        ax1.legend(loc="lower left")
 
         ax2.plot(T_z_best, depth_km)
         ax2.set_xlabel("Temperature (K)")

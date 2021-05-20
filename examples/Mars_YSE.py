@@ -2,35 +2,17 @@ from Te_HF_Conversion import *
 
 planet = "Mars"
 plot_YSE = True  # Plot yield strength envelope on the fly for each tested heat flow
-plot = (
-    True  # Plot the final yield strength envelope and associated temperature profile
-)
+plot = True  # Plot the final yield strength envelope and associated temperature profile
 
-if planet == "Mars":
-    g = Planet_constants.Mars_g0
-    rhobar = Planet_constants.Mars_density
-    R_mpr = Planet_constants.Mars_mpr
-    Q_olivine = Planet_constants.Q_olivine_wet
-    A_olivine = Planet_constants.A_olivine_wet
-    n_olivine = Planet_constants.n_olivine_wet
-    Q_diabase = Planet_constants.Q_diabase_wet
-    A_diabase = Planet_constants.A_diabase_wet
-    n_diabase = Planet_constants.n_diabase_wet
-elif planet == "Venus":
-    g = Planet_constants.Venus_g0
-    rhobar = Planet_constants.Venus_density
-    R_mpr = Planet_constants.Venus_mpr
-    Q_olivine = Planet_constants.Q_olivine_dry
-    A_olivine = Planet_constants.A_olivine_dry
-    n_olivine = Planet_constants.n_olivine_dry
-    Q_diabase = Planet_constants.Q_diabase_dry
-    A_diabase = Planet_constants.A_diabase_dry
-    n_diabase = Planet_constants.n_diabase_dry
-else:
-    raise ValueError(
-        "planet must be Mars or Venus for now"
-        + "Input value was {:s}.".format(repr(planet))
-    )
+g = Planet_constants.Mars_g0
+rhobar = Planet_constants.Mars_density
+R_mpr = Planet_constants.Mars_mpr
+Q_olivine = Planet_constants.Q_olivine_wet
+A_olivine = Planet_constants.A_olivine_wet
+n_olivine = Planet_constants.n_olivine_wet
+Q_diabase = Planet_constants.Q_diabase_wet
+A_diabase = Planet_constants.A_diabase_wet
+n_diabase = Planet_constants.n_diabase_wet
 
 ## Arbitrary constants
 # density of the crust (kg m-3)
