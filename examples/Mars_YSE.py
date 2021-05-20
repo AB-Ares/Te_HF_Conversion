@@ -1,9 +1,9 @@
 from Te_HF_Conversion import *
 
 planet = "Mars"
-plot_YSE = True  # Plot yield strength enveloppe on the fly for each tested heat flow
+plot_YSE = True  # Plot yield strength envelope on the fly for each tested heat flow
 plot = (
-    True  # Plot the final yield strength enveloppe and associated temperature profile
+    True  # Plot the final yield strength envelope and associated temperature profile
 )
 
 if planet == "Mars":

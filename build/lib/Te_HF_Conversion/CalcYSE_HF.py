@@ -21,18 +21,18 @@ def Curv_Moment(
 ):
     """
     Determine the bending moment given the input yield
-    strength enveloppe and curvature
+    strength envelope and curvature
 
     Returns
     -------
     Mx : float
        The bending moment of the plate
     d_sig_tab1 : array size(depth)
-       Integrated part of the yield strength enveloppe in compression (Pa)
+       Integrated part of the yield strength envelope in compression (Pa)
     d_sig_tab2 : array size(depth)
-       Integrated part of the yield strength enveloppe in tension (Pa)
+       Integrated part of the yield strength envelope in tension (Pa)
     sigma_ela : array size(depth)
-       Integrated elastic part of the yield strength enveloppe (Pa)
+       Integrated elastic part of the yield strength envelope (Pa)
 
     Parameters
     ----------
@@ -236,10 +236,10 @@ def Conversion_Te_HF(
     quiet : Boolean, default = True
        if True, print various outputs.
     plot : Boolean, default = False
-       if True, plot the best-fit yield strength enveloppe
+       if True, plot the best-fit yield strength envelope
        and temperature profile.
     plot_YSE : Boolean, default = False
-       if True, plot the yield strength enveloppe for each
+       if True, plot the yield strength envelope for each
        tested heat flows."""
 
     if quiet is False:
