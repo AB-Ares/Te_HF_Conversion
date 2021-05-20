@@ -13,35 +13,22 @@ n_olivine = Planet_constants.n_olivine_wet
 Q_diabase = Planet_constants.Q_diabase_wet
 A_diabase = Planet_constants.A_diabase_wet
 n_diabase = Planet_constants.n_diabase_wet
+R_gas = Planet_constants.R_gas
 
 ## Arbitrary constants
-# density of the crust (kg m-3)
-rhoc = 2900.0
-# density of the mantle (kg m-3)
-rhom = 3500.0
-# surface temperature (K)
-Ts = 210.0
-# young's modulus (Pa)
-young = 1e11
-# poisson's ratio
-poisson = 0.25
-# thermal conductivity of the crust (W m−1 K−1)
-k_crust = 3.0
-# thermal conductivity of the mantle (W m−1 K−1)
-k_mantle = 4.0
-# Bounding stress (Pa)
-sig_y = 10e6
-# Average volumetric crustal heat production (W kg-1)
-H_c = 4.9e-11
-# elastic thickness (m)
-Te = 100e3
-# crustal thickness (m)
-Tc = 50e3
-# plate curvature (m-1)
-K_curv = 1e-7
-# strain rate (s-1)
-eps = 1e-16
-R_gas = Planet_constants.R_gas
+rhoc = 2900.0  # density of the crust (kg m-3)
+rhom = 3500.0  # density of the mantle (kg m-3)
+Ts = 210.0  # surface temperature (K)
+young = 1e11  # young's modulus (Pa)
+poisson = 0.25  # poisson's ratio
+k_crust = 3.0  # thermal conductivity of the crust (W m−1 K−1)
+k_mantle = 4.0  # thermal conductivity of the mantle (W m−1 K−1)
+sig_y = 10e6  # Bounding stress (Pa)
+H_c = 4.9e-11  # Average volumetric crustal heat production (W kg-1)
+Te = 100e3  # elastic thickness (m)
+Tc = 50e3  # crustal thickness (m)
+K_curv = 1e-7  # plate curvature (m-1)
+eps = 1e-16  # strain rate (s-1)
 
 Conversion_Te_HF(
     Q_diabase,
