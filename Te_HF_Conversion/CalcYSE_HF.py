@@ -284,12 +284,12 @@ def Conversion_Te_HF(
 
     # Initial guesses on the heat flows to be explored
     if HF_min is None:
-        HFmin = int(0.3 * F)
+        HF_min = int(0.3 * F)
     if HF_max is None:
-        HFmax = int(1.5 * F)
+        HF_max = int(1.5 * F)
     if HF_step is None:
-        HFstep = 1
-    HF_arr = range(HFmin, HFmax, HFstep)
+        HF_step = 1
+    HF_arr = range(HF_min, HF_max, HF_step)
 
     if max_depth is None:
         max_depth = int(Te * 3)  # max depth for the integration (m)
