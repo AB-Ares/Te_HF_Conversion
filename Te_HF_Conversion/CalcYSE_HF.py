@@ -229,14 +229,18 @@ def Conversion_Te_HF(
     R_gas : float
        Gas constant (J mol-1 K-1).
     HF_min : float, default = None
-       Minimum heat flow to test (mW m-2)
-    HF_min : float, default = None
-       Maximum heat flow to test (mW m-2)
-    HF_step : float, default = None
+       Minimum heat flow to test (mW m-2), if None
+       we guess it assuming mechanical thickness
+       equals elastic thickness (zero curvature).
+    HF_max : float, default = None
+       Maximum heat flow to test (mW m-2), if None
+       we guess it assuming mechanical thickness
+       equals elastic thickness (zero curvature).
+    HF_step : float, default = 1
        Heat flow step to test (mW m-2)
-    step_depth : integer, default = None
+    step_depth : integer, default = Te / 1000.
        Iteration depth step for the integration.
-    max_depth : integer, default = None
+    max_depth : integer, default = Te * 3
        Maximum depth for the integration.
     quiet : Boolean, default = True
        if True, print various outputs.

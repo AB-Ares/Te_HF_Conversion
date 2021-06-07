@@ -1,7 +1,7 @@
 from Te_HF_Conversion import *
 import seaborn as sns
 
-sns.set_context('notebook')
+sns.set_context("notebook")
 
 plot_YSE = True  # Plot yield strength envelope on the fly for each tested heat flow
 plot = True  # Plot the final yield strength envelope and associated temperature profile
@@ -59,4 +59,6 @@ Conversion_Te_HF(
     quiet=False,
     plot=plot,
     plot_YSE=plot_YSE,
+    HF_min=10,
+    HF_max=16,
 )
