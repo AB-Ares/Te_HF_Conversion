@@ -228,11 +228,15 @@ and thermal gradients from input rheology and elastic parameters.</p>
 <li><p><strong>sig_y</strong> (<em>float</em>) – Bounding stress (Pa).</p></li>
 <li><p><strong>Ts</strong> (<em>float</em>) – Surface temperature (K).</p></li>
 <li><p><strong>R_gas</strong> (<em>float</em>) – Gas constant (J mol-1 K-1).</p></li>
-<li><p><strong>HF_min</strong> (<em>float</em><em>, </em><em>default = None</em>) – Minimum heat flow to test (mW m-2)</p></li>
-<li><p><strong>HF_min</strong> – Maximum heat flow to test (mW m-2)</p></li>
-<li><p><strong>HF_step</strong> (<em>float</em><em>, </em><em>default = None</em>) – Heat flow step to test (mW m-2)</p></li>
-<li><p><strong>step_depth</strong> (<em>integer</em><em>, </em><em>default = None</em>) – Iteration depth step for the integration.</p></li>
-<li><p><strong>max_depth</strong> (<em>integer</em><em>, </em><em>default = None</em>) – Maximum depth for the integration.</p></li>
+<li><p><strong>HF_min</strong> (<em>float</em><em>, </em><em>default = None</em>) – Minimum heat flow to test (mW m-2), if None
+we guess it assuming mechanical thickness
+equals elastic thickness (zero curvature).</p></li>
+<li><p><strong>HF_max</strong> (<em>float</em><em>, </em><em>default = None</em>) – Maximum heat flow to test (mW m-2), if None
+we guess it assuming mechanical thickness
+equals elastic thickness (zero curvature).</p></li>
+<li><p><strong>HF_step</strong> (<em>float</em><em>, </em><em>default = 1</em>) – Heat flow step to test (mW m-2)</p></li>
+<li><p><strong>step_depth</strong> (<em>integer</em><em>, </em><em>default = Te / 1000.</em>) – Iteration depth step for the integration.</p></li>
+<li><p><strong>max_depth</strong> (<em>integer</em><em>, </em><em>default = Te * 3</em>) – Maximum depth for the integration.</p></li>
 <li><p><strong>quiet</strong> (<em>Boolean</em><em>, </em><em>default = True</em>) – if True, print various outputs.</p></li>
 <li><p><strong>plot</strong> (<em>Boolean</em><em>, </em><em>default = False</em>) – if True, plot the best-fit yield strength envelope
 and temperature profile.</p></li>
@@ -341,11 +345,15 @@ and thermal gradients from input rheology and elastic parameters.</p>
 <li><p><strong>sig_y</strong> (<em>float</em>) – Bounding stress (Pa).</p></li>
 <li><p><strong>Ts</strong> (<em>float</em>) – Surface temperature (K).</p></li>
 <li><p><strong>R_gas</strong> (<em>float</em>) – Gas constant (J mol-1 K-1).</p></li>
-<li><p><strong>HF_min</strong> (<em>float</em><em>, </em><em>default = None</em>) – Minimum heat flow to test (mW m-2)</p></li>
-<li><p><strong>HF_min</strong> – Maximum heat flow to test (mW m-2)</p></li>
-<li><p><strong>HF_step</strong> (<em>float</em><em>, </em><em>default = None</em>) – Heat flow step to test (mW m-2)</p></li>
-<li><p><strong>step_depth</strong> (<em>integer</em><em>, </em><em>default = None</em>) – Iteration depth step for the integration.</p></li>
-<li><p><strong>max_depth</strong> (<em>integer</em><em>, </em><em>default = None</em>) – Maximum depth for the integration.</p></li>
+<li><p><strong>HF_min</strong> (<em>float</em><em>, </em><em>default = None</em>) – Minimum heat flow to test (mW m-2), if None
+we guess it assuming mechanical thickness
+equals elastic thickness (zero curvature).</p></li>
+<li><p><strong>HF_max</strong> (<em>float</em><em>, </em><em>default = None</em>) – Maximum heat flow to test (mW m-2), if None
+we guess it assuming mechanical thickness
+equals elastic thickness (zero curvature).</p></li>
+<li><p><strong>HF_step</strong> (<em>float</em><em>, </em><em>default = 1</em>) – Heat flow step to test (mW m-2)</p></li>
+<li><p><strong>step_depth</strong> (<em>integer</em><em>, </em><em>default = Te / 1000.</em>) – Iteration depth step for the integration.</p></li>
+<li><p><strong>max_depth</strong> (<em>integer</em><em>, </em><em>default = Te * 3</em>) – Maximum depth for the integration.</p></li>
 <li><p><strong>quiet</strong> (<em>Boolean</em><em>, </em><em>default = True</em>) – if True, print various outputs.</p></li>
 <li><p><strong>plot</strong> (<em>Boolean</em><em>, </em><em>default = False</em>) – if True, plot the best-fit yield strength envelope
 and temperature profile.</p></li>
