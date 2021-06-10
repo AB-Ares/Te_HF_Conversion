@@ -36,3 +36,7 @@ If you would like to modify the source code, download the Displacement_strain_pl
 
 ## Author
 [Adrien Broquet](https://www.oca.eu/fr/adrien-broquet) (adrien.broquet@oca.eu)
+
+## Cite
+You can cite the latest release of the package as:
+Adrien Broquet. (2021, June 10). AB-Ares/Te_HF_Conversion: 0.1.0 (Version 0.1.0). Zenodo. http://doi.org/10.5281/zenodo.4922606
