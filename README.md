@@ -18,7 +18,9 @@ strength envelope and curvature.
 `CalcYSE_HF`  Determine the surface, crustal, and mantle heat flows, mechanical thickness, and thermal gradients from input rheology and elastic parameters.
 
 ## Example scripts
-`Mars_YSE`  Determine the surface, crust, and mantle heat flows for a given elastic thickness on Mars assuming a wet or dry rheology for the diabase crust and olivine mantle. Plot the yield strength envelope.
+`Mars_YSE`  Determine the surface, crust, and mantle heat flows for a given elastic thickness on Mars assuming a wet rheology for the diabase crust and olivine mantle. Plot the yield strength envelope.
+
+`Venus_YSE`  Determine the surface, crust, and mantle heat flows for a given elastic thickness on Venus assuming a dry rheology for the diabase crust and olivine mantle. Plot the yield strength envelope.
 
 ## How to install and run Te_HF_Conversion
 If you would like to modify the source code, download the Displacement_strain_planet repository and install using pip (or pip3 depending on your installation).
@@ -32,6 +34,7 @@ If you would like to modify the source code, download the Displacement_strain_pl
 ```bash
     cd examples
     python Mars_YSE.py 
+    python Venus_YSE.py 
 ```
 
 ## Author

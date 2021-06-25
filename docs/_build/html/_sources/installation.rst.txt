@@ -13,6 +13,7 @@ To execute a script, it is only necessary to enter the `examples` directory and 
 
     cd examples
     python Mars_YSE.py 
+    python Venus_YSE.py 
 
 .. note::
     Depending on how your system is set up, it might be necessary to use
