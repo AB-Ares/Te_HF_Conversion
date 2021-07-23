@@ -11,7 +11,7 @@ Mars
     A script that determines the surface, crust, and mantle heat flows given the input rheology and elastic thickness on Mars. Radiogenic heating can be included, and it is possible to plot the yield strength envelope and temperature profile.
 
 Venus
-----
+------
 
 ``Venus_YSE.py``
     A script that determines the surface, crust, and mantle heat flows given the input rheology and elastic thickness on Venus. Radiogenic heating can be included, and it is possible to plot the yield strength envelope and temperature profile.

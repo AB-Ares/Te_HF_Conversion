@@ -116,6 +116,10 @@ def Curv_Moment(
         plt.plot(sigma_ela, depth_km, "--r", label="Curvature")
         plt.axvline(sig_y, label="Bounding stress")
         plt.axvline(-sig_y)
+        plt.xlim(
+            1.5 * np.min([d_sig_tmp1.min(), d_sig_tab2.min()]),
+            1.5 * np.max([d_sig_tmp0.max(), d_sig_tmp1.max()]),
+        )
         plt.ylabel("Depth (km)")
         plt.xlabel("Sress (Pa)")
         plt.legend(loc="lower left")
@@ -296,7 +300,9 @@ def Conversion_Te_HF(
     HF_arr = range(HF_min, HF_max, HF_step)
 
     if max_depth is None:
-        max_depth = int(Te * 3)  # max depth for the integration (m)
+        max_depth = np.max(
+            [int(Te * 3), int(Tc + 2 * Te)]
+        )  # max depth for the integration (m)
     if step_depth is None:
         step_depth = int(
             Te / 1000
@@ -485,6 +491,12 @@ def Conversion_Te_HF(
             d_sig_tab2_best = d_sig_tab2
             sigma_ela_best = sigma_ela
             T_z_best = T_z_tab
+        else:
+            if quiet is False:
+                print(
+                    " YSE misfit is worse %.2f, M_real/M_el %.2f, crust, mantle, and surface heat flows (mW m-2) %.2f, %.2f, %.2f "
+                    % (misfit, abs(M_real / M_el), (Fs - F) * 1e3, F * 1e3, Fs * 1e3)
+                )
 
     # Mechanical thickness of the lithosphere
     Tm = (
@@ -512,6 +524,10 @@ def Conversion_Te_HF(
         ax1.plot(sigma_ela_best, depth_km, "--r", label="Curvature")
         ax1.axvline(sig_y, label="Bounding stress")
         ax1.axvline(-sig_y)
+        ax1.set_xlim(
+            1.5 * np.min([d_sig_tmp1_best.min(), d_sig_tab2_best.min()]),
+            1.5 * np.max([d_sig_tmp0_best.max(), d_sig_tab1_best.max()]),
+        )
         ax1.set_xlabel("Sress (Pa)")
         ax1.legend(loc="lower left")
         ax1.set_title(

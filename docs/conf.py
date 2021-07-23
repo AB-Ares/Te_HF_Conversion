@@ -1,11 +1,12 @@
 import datetime
 import Te_HF_Conversion
+from importlib.metadata import version
 
 # Project information
 year = datetime.date.today().year
 project = "Te_HF_Conversion"
 author = "Adrien Broquet"
-version = "0.1.0"
+version = version('Te_HF_Conversion')
 
 
 # General configuration

@@ -1,4 +1,5 @@
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4973894.svg)](https://doi.org/10.5281/zenodo.4973894)
 
 # Te_HF_Conversion
 
@@ -42,4 +43,4 @@ If you would like to modify the source code, download the Displacement_strain_pl
 
 ## Cite
 You can cite the latest release of the package as:
-Adrien Broquet. (2021, June 10). AB-Ares/Te_HF_Conversion: 0.1.0 (Version 0.1.0). Zenodo. http://doi.org/10.5281/zenodo.4922606
+Adrien Broquet. AB-Ares/Te_HF_Conversion: 0.1.1 (Version 0.1.1). Zenodo. http://doi.org/10.5281/zenodo.4973893
