@@ -26,18 +26,18 @@ def Curv_Moment(
     Returns
     -------
     Mx : float
-       The bending moment of the plate
+       The bending moment of the plate.
     d_sig_tab1 : array size(depth)
-       Integrated part of the yield strength envelope in compression (Pa)
+       Integrated part of the yield strength envelope in compression (Pa).
     d_sig_tab2 : array size(depth)
-       Integrated part of the yield strength envelope in tension (Pa)
+       Integrated part of the yield strength envelope in tension (Pa).
     sigma_ela : array size(depth)
-       Integrated elastic part of the yield strength envelope (Pa)
+       Integrated elastic part of the yield strength envelope (Pa).
 
     Parameters
     ----------
     HF : float
-       The input mantle heat flow (W m-2)
+       The input mantle heat flow (W m-2).
     d_sig_tmp0 : float
        Stress curve, tension (Pa).
     d_sig_tmp1 : float
@@ -54,8 +54,8 @@ def Curv_Moment(
        Iteration depth step for the integration.
     sig_y : float
        Bounding stress (Pa).
-    plot_YSE : Boolean, default = False
-       If true, plot the yield strength envelope
+    plot_YSE : boolean, optional, default = False
+       If true, plot the yield strength envelope.
     """
     NetAxial = 0
     neutralfib = 0
@@ -181,7 +181,7 @@ def Conversion_Te_HF(
        The mantle temperature gradient (K km-1).
     dT_s : float
        The surface temperature gradient (K km-1).
-    Tm : Float
+    Tm : float
        Mechanical thickness of the lithosphere (m).
 
     Parameters
@@ -232,26 +232,26 @@ def Conversion_Te_HF(
        Surface temperature (K).
     R_gas : float
        Gas constant (J mol-1 K-1).
-    HF_min : float, default = None
+    HF_min : float, optional, default = None
        Minimum heat flow to test (mW m-2), if None
        we guess it assuming mechanical thickness
        equals elastic thickness (zero curvature).
-    HF_max : float, default = None
+    HF_max : float, optional, default = None
        Maximum heat flow to test (mW m-2), if None
        we guess it assuming mechanical thickness
        equals elastic thickness (zero curvature).
-    HF_step : float, default = 1
+    HF_step : float, optional, default = 1
        Heat flow step to test (mW m-2)
-    step_depth : integer, default = Te / 1000.
+    step_depth : integer, optional, default = Te / 1000
        Iteration depth step for the integration.
-    max_depth : integer, default = Te * 3
+    max_depth : integer, optional, default = Te * 3
        Maximum depth for the integration.
-    quiet : Boolean, default = True
+    quiet : boolean, optional, default = True
        if True, print various outputs.
-    plot : Boolean, default = False
+    plot : boolean, optional, default = False
        if True, plot the best-fit yield strength envelope
        and temperature profile.
-    plot_YSE : Boolean, default = False
+    plot_YSE : boolean, optional, default = False
        if True, plot the yield strength envelope for each
        tested heat flows."""
 

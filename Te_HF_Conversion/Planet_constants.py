@@ -1,3 +1,6 @@
+"""
+Te_HF_Conversion some rheological and planetary constants.
+"""
 import numpy as np
 
 # gas cst CODATA (J mol-1 K-1)
