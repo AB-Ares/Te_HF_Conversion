@@ -199,7 +199,7 @@ and thermal gradients from input rheology and elastic parameters.</p>
 <li><p><strong>dT_c</strong> (<em>float</em>) – The crust temperature gradient (K km-1).</p></li>
 <li><p><strong>dT_m</strong> (<em>float</em>) – The mantle temperature gradient (K km-1).</p></li>
 <li><p><strong>dT_s</strong> (<em>float</em>) – The surface temperature gradient (K km-1).</p></li>
-<li><p><strong>Tm</strong> (<em>Float</em>) – Mechanical thickness of the lithosphere (m).</p></li>
+<li><p><strong>Tm</strong> (<em>float</em>) – Mechanical thickness of the lithosphere (m).</p></li>
 </ul>
 </p>
 </dd>
@@ -228,19 +228,19 @@ and thermal gradients from input rheology and elastic parameters.</p>
 <li><p><strong>sig_y</strong> (<em>float</em>) – Bounding stress (Pa).</p></li>
 <li><p><strong>Ts</strong> (<em>float</em>) – Surface temperature (K).</p></li>
 <li><p><strong>R_gas</strong> (<em>float</em>) – Gas constant (J mol-1 K-1).</p></li>
-<li><p><strong>HF_min</strong> (<em>float</em><em>, </em><em>default = None</em>) – Minimum heat flow to test (mW m-2), if None
+<li><p><strong>HF_min</strong> (<em>float</em><em>, </em><em>optional</em><em>, </em><em>default = None</em>) – Minimum heat flow to test (mW m-2), if None
 we guess it assuming mechanical thickness
 equals elastic thickness (zero curvature).</p></li>
-<li><p><strong>HF_max</strong> (<em>float</em><em>, </em><em>default = None</em>) – Maximum heat flow to test (mW m-2), if None
+<li><p><strong>HF_max</strong> (<em>float</em><em>, </em><em>optional</em><em>, </em><em>default = None</em>) – Maximum heat flow to test (mW m-2), if None
 we guess it assuming mechanical thickness
 equals elastic thickness (zero curvature).</p></li>
-<li><p><strong>HF_step</strong> (<em>float</em><em>, </em><em>default = 1</em>) – Heat flow step to test (mW m-2)</p></li>
-<li><p><strong>step_depth</strong> (<em>integer</em><em>, </em><em>default = Te / 1000.</em>) – Iteration depth step for the integration.</p></li>
-<li><p><strong>max_depth</strong> (<em>integer</em><em>, </em><em>default = Te * 3</em>) – Maximum depth for the integration.</p></li>
-<li><p><strong>quiet</strong> (<em>Boolean</em><em>, </em><em>default = True</em>) – if True, print various outputs.</p></li>
-<li><p><strong>plot</strong> (<em>Boolean</em><em>, </em><em>default = False</em>) – if True, plot the best-fit yield strength envelope
+<li><p><strong>HF_step</strong> (<em>float</em><em>, </em><em>optional</em><em>, </em><em>default = 1</em>) – Heat flow step to test (mW m-2)</p></li>
+<li><p><strong>step_depth</strong> (<em>integer</em><em>, </em><em>optional</em><em>, </em><em>default = Te / 1000</em>) – Iteration depth step for the integration.</p></li>
+<li><p><strong>max_depth</strong> (<em>integer</em><em>, </em><em>optional</em><em>, </em><em>default = Te * 3</em>) – Maximum depth for the integration.</p></li>
+<li><p><strong>quiet</strong> (<em>boolean</em><em>, </em><em>optional</em><em>, </em><em>default = True</em>) – if True, print various outputs.</p></li>
+<li><p><strong>plot</strong> (<em>boolean</em><em>, </em><em>optional</em><em>, </em><em>default = False</em>) – if True, plot the best-fit yield strength envelope
 and temperature profile.</p></li>
-<li><p><strong>plot_YSE</strong> (<em>Boolean</em><em>, </em><em>default = False</em>) – if True, plot the yield strength envelope for each
+<li><p><strong>plot_YSE</strong> (<em>boolean</em><em>, </em><em>optional</em><em>, </em><em>default = False</em>) – if True, plot the yield strength envelope for each
 tested heat flows.</p></li>
 </ul>
 </dd>
@@ -255,16 +255,16 @@ strength envelope and curvature</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p><ul class="simple">
-<li><p><strong>Mx</strong> (<em>float</em>) – The bending moment of the plate</p></li>
-<li><p><strong>d_sig_tab1</strong> (<em>array size(depth)</em>) – Integrated part of the yield strength envelope in compression (Pa)</p></li>
-<li><p><strong>d_sig_tab2</strong> (<em>array size(depth)</em>) – Integrated part of the yield strength envelope in tension (Pa)</p></li>
-<li><p><strong>sigma_ela</strong> (<em>array size(depth)</em>) – Integrated elastic part of the yield strength envelope (Pa)</p></li>
+<li><p><strong>Mx</strong> (<em>float</em>) – The bending moment of the plate.</p></li>
+<li><p><strong>d_sig_tab1</strong> (<em>array size(depth)</em>) – Integrated part of the yield strength envelope in compression (Pa).</p></li>
+<li><p><strong>d_sig_tab2</strong> (<em>array size(depth)</em>) – Integrated part of the yield strength envelope in tension (Pa).</p></li>
+<li><p><strong>sigma_ela</strong> (<em>array size(depth)</em>) – Integrated elastic part of the yield strength envelope (Pa).</p></li>
 </ul>
 </p>
 </dd>
 <dt class="field-even">Parameters</dt>
 <dd class="field-even"><ul class="simple">
-<li><p><strong>HF</strong> (<em>float</em>) – The input mantle heat flow (W m-2)</p></li>
+<li><p><strong>HF</strong> (<em>float</em>) – The input mantle heat flow (W m-2).</p></li>
 <li><p><strong>d_sig_tmp0</strong> (<em>float</em>) – Stress curve, tension (Pa).</p></li>
 <li><p><strong>d_sig_tmp1</strong> (<em>float</em>) – Stress curve, compression (Pa).</p></li>
 <li><p><strong>K_curv</strong> (<em>float</em>) – Plate curvature (m-1).</p></li>
@@ -273,7 +273,7 @@ strength envelope and curvature</p>
 <li><p><strong>depth</strong> (<em>array</em><em>, </em><em>float</em>) – Input depth for the integration (m).</p></li>
 <li><p><strong>step_depth</strong> (<em>float</em>) – Iteration depth step for the integration.</p></li>
 <li><p><strong>sig_y</strong> (<em>float</em>) – Bounding stress (Pa).</p></li>
-<li><p><strong>plot_YSE</strong> (<em>Boolean</em><em>, </em><em>default = False</em>) – If true, plot the yield strength envelope</p></li>
+<li><p><strong>plot_YSE</strong> (<em>boolean</em><em>, </em><em>optional</em><em>, </em><em>default = False</em>) – If true, plot the yield strength envelope.</p></li>
 </ul>
 </dd>
 </dl>
@@ -282,6 +282,7 @@ strength envelope and curvature</p>
 </div>
 <div class="section" id="module-Te_HF_Conversion.Planet_constants">
 <span id="te-hf-conversion-planet-constants-module"></span><h2>Te_HF_Conversion.Planet_constants module<a class="headerlink" href="#module-Te_HF_Conversion.Planet_constants" title="Permalink to this headline">¶</a></h2>
+<p>Te_HF_Conversion some rheological and planetary constants.</p>
 </div>
 <div class="section" id="module-Te_HF_Conversion">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-Te_HF_Conversion" title="Permalink to this headline">¶</a></h2>
@@ -316,7 +317,7 @@ and thermal gradients from input rheology and elastic parameters.</p>
 <li><p><strong>dT_c</strong> (<em>float</em>) – The crust temperature gradient (K km-1).</p></li>
 <li><p><strong>dT_m</strong> (<em>float</em>) – The mantle temperature gradient (K km-1).</p></li>
 <li><p><strong>dT_s</strong> (<em>float</em>) – The surface temperature gradient (K km-1).</p></li>
-<li><p><strong>Tm</strong> (<em>Float</em>) – Mechanical thickness of the lithosphere (m).</p></li>
+<li><p><strong>Tm</strong> (<em>float</em>) – Mechanical thickness of the lithosphere (m).</p></li>
 </ul>
 </p>
 </dd>
@@ -345,19 +346,19 @@ and thermal gradients from input rheology and elastic parameters.</p>
 <li><p><strong>sig_y</strong> (<em>float</em>) – Bounding stress (Pa).</p></li>
 <li><p><strong>Ts</strong> (<em>float</em>) – Surface temperature (K).</p></li>
 <li><p><strong>R_gas</strong> (<em>float</em>) – Gas constant (J mol-1 K-1).</p></li>
-<li><p><strong>HF_min</strong> (<em>float</em><em>, </em><em>default = None</em>) – Minimum heat flow to test (mW m-2), if None
+<li><p><strong>HF_min</strong> (<em>float</em><em>, </em><em>optional</em><em>, </em><em>default = None</em>) – Minimum heat flow to test (mW m-2), if None
 we guess it assuming mechanical thickness
 equals elastic thickness (zero curvature).</p></li>
-<li><p><strong>HF_max</strong> (<em>float</em><em>, </em><em>default = None</em>) – Maximum heat flow to test (mW m-2), if None
+<li><p><strong>HF_max</strong> (<em>float</em><em>, </em><em>optional</em><em>, </em><em>default = None</em>) – Maximum heat flow to test (mW m-2), if None
 we guess it assuming mechanical thickness
 equals elastic thickness (zero curvature).</p></li>
-<li><p><strong>HF_step</strong> (<em>float</em><em>, </em><em>default = 1</em>) – Heat flow step to test (mW m-2)</p></li>
-<li><p><strong>step_depth</strong> (<em>integer</em><em>, </em><em>default = Te / 1000.</em>) – Iteration depth step for the integration.</p></li>
-<li><p><strong>max_depth</strong> (<em>integer</em><em>, </em><em>default = Te * 3</em>) – Maximum depth for the integration.</p></li>
-<li><p><strong>quiet</strong> (<em>Boolean</em><em>, </em><em>default = True</em>) – if True, print various outputs.</p></li>
-<li><p><strong>plot</strong> (<em>Boolean</em><em>, </em><em>default = False</em>) – if True, plot the best-fit yield strength envelope
+<li><p><strong>HF_step</strong> (<em>float</em><em>, </em><em>optional</em><em>, </em><em>default = 1</em>) – Heat flow step to test (mW m-2)</p></li>
+<li><p><strong>step_depth</strong> (<em>integer</em><em>, </em><em>optional</em><em>, </em><em>default = Te / 1000</em>) – Iteration depth step for the integration.</p></li>
+<li><p><strong>max_depth</strong> (<em>integer</em><em>, </em><em>optional</em><em>, </em><em>default = Te * 3</em>) – Maximum depth for the integration.</p></li>
+<li><p><strong>quiet</strong> (<em>boolean</em><em>, </em><em>optional</em><em>, </em><em>default = True</em>) – if True, print various outputs.</p></li>
+<li><p><strong>plot</strong> (<em>boolean</em><em>, </em><em>optional</em><em>, </em><em>default = False</em>) – if True, plot the best-fit yield strength envelope
 and temperature profile.</p></li>
-<li><p><strong>plot_YSE</strong> (<em>Boolean</em><em>, </em><em>default = False</em>) – if True, plot the yield strength envelope for each
+<li><p><strong>plot_YSE</strong> (<em>boolean</em><em>, </em><em>optional</em><em>, </em><em>default = False</em>) – if True, plot the yield strength envelope for each
 tested heat flows.</p></li>
 </ul>
 </dd>
@@ -372,16 +373,16 @@ strength envelope and curvature</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p><ul class="simple">
-<li><p><strong>Mx</strong> (<em>float</em>) – The bending moment of the plate</p></li>
-<li><p><strong>d_sig_tab1</strong> (<em>array size(depth)</em>) – Integrated part of the yield strength envelope in compression (Pa)</p></li>
-<li><p><strong>d_sig_tab2</strong> (<em>array size(depth)</em>) – Integrated part of the yield strength envelope in tension (Pa)</p></li>
-<li><p><strong>sigma_ela</strong> (<em>array size(depth)</em>) – Integrated elastic part of the yield strength envelope (Pa)</p></li>
+<li><p><strong>Mx</strong> (<em>float</em>) – The bending moment of the plate.</p></li>
+<li><p><strong>d_sig_tab1</strong> (<em>array size(depth)</em>) – Integrated part of the yield strength envelope in compression (Pa).</p></li>
+<li><p><strong>d_sig_tab2</strong> (<em>array size(depth)</em>) – Integrated part of the yield strength envelope in tension (Pa).</p></li>
+<li><p><strong>sigma_ela</strong> (<em>array size(depth)</em>) – Integrated elastic part of the yield strength envelope (Pa).</p></li>
 </ul>
 </p>
 </dd>
 <dt class="field-even">Parameters</dt>
 <dd class="field-even"><ul class="simple">
-<li><p><strong>HF</strong> (<em>float</em>) – The input mantle heat flow (W m-2)</p></li>
+<li><p><strong>HF</strong> (<em>float</em>) – The input mantle heat flow (W m-2).</p></li>
 <li><p><strong>d_sig_tmp0</strong> (<em>float</em>) – Stress curve, tension (Pa).</p></li>
 <li><p><strong>d_sig_tmp1</strong> (<em>float</em>) – Stress curve, compression (Pa).</p></li>
 <li><p><strong>K_curv</strong> (<em>float</em>) – Plate curvature (m-1).</p></li>
@@ -390,7 +391,7 @@ strength envelope and curvature</p>
 <li><p><strong>depth</strong> (<em>array</em><em>, </em><em>float</em>) – Input depth for the integration (m).</p></li>
 <li><p><strong>step_depth</strong> (<em>float</em>) – Iteration depth step for the integration.</p></li>
 <li><p><strong>sig_y</strong> (<em>float</em>) – Bounding stress (Pa).</p></li>
-<li><p><strong>plot_YSE</strong> (<em>Boolean</em><em>, </em><em>default = False</em>) – If true, plot the yield strength envelope</p></li>
+<li><p><strong>plot_YSE</strong> (<em>boolean</em><em>, </em><em>optional</em><em>, </em><em>default = False</em>) – If true, plot the yield strength envelope.</p></li>
 </ul>
 </dd>
 </dl>
