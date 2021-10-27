@@ -308,7 +308,7 @@ def Conversion_Te_HF(
             Te / 1000
         )  # step of the integration, determines the accuracy of the numerical integration
     # but slows down the computation.
-    depths_arr = np.array(range(1, max_depth, step_depth))
+    depths_arr = np.array(range(1, int(max_depth), step_depth))
 
     d_sig_tab = np.zeros((3, np.size(depths_arr)))
     T_z_tab = np.zeros((np.size(depths_arr)))
@@ -499,12 +499,16 @@ def Conversion_Te_HF(
                 )
 
     # Mechanical thickness of the lithosphere
-    Tm = (
-        depths_arr[
-            np.where(np.logical_and(abs(d_sig_tmp0_best) <= sig_y, depths_arr > Te))
-        ][0]
-        - 1000
-    )
+    find_Tm = np.where(np.logical_and(abs(d_sig_tmp0_best) <= sig_y, depths_arr > Te))
+    if np.size(find_Tm) == 0:
+        raise ValueError(
+            " Mechanical thickness larger than maximum input depth\n"
+            + "User should increase the max_depth parameter, value is: %i km"
+            % (max_depth / 1e3)
+        )
+    else:
+        Tm = depths_arr[find_Tm][0] - 1000
+
     F_c_best = F_s_best - F_m_best
 
     if quiet is False:
