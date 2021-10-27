@@ -340,7 +340,7 @@ def Conversion_Te_HF(
     if np.abs(M_el - M_el_analyt) / M_el_analyt > 5e2:
         raise ValueError(
             "The difference between the integrated elastic moment"
-            + " and analytical is too large (%s%)"
+            + " and analytical is too large (%s)"
             % (100 * np.abs(M_el - M_el_analyt) / M_el_analyt)
             + "Increase either step_depth or max_depth, which are here set to %i and %i km"
             % (step_depth / 1e3, max_depth / 1e3)
