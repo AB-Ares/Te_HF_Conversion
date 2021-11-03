@@ -13,7 +13,7 @@ Conversion of the elastic thickness of the lithosphere to the planetary heat flo
 Heat flow calculations have been benchmarked to various studies (e.g., [McNutt, 1984](https://agupubs.onlinelibrary.wiley.com/doi/10.1029/JB089iB13p11180) or [Solomon & Head, 1990](https://agupubs.onlinelibrary.wiley.com/doi/10.1029/JB095iB07p11073)). I thank [Julia Maia](https://www.oca.eu/fr/julia-maia) for having performed some further benchmarks to the literature.
 
 ### Caution
-This code doesn't properly account for crust/mantle decoupling when estimating elastic strengths (see [Burov & Diament, 1984](https://agupubs.onlinelibrary.wiley.com/doi/10.1029/94JB02770)). This will be fixed soon.
+This code doesn't properly account for crust/mantle decoupling when estimating elastic strengths (see [Burov & Diament, 1984](https://agupubs.onlinelibrary.wiley.com/doi/10.1029/94JB02770)). The decoupled mantle doesn't have its own elastic core. This will be fixed soon.
 
 ## Methods
 `Curv_Moment`  Determine the bending moment given the input yield
