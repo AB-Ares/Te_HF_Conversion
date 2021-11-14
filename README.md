@@ -12,17 +12,18 @@ Conversion of the elastic thickness of the lithosphere to the planetary heat flo
 ### Benchmarks
 Heat flow calculations have been benchmarked to various studies (e.g., [McNutt, 1984](https://agupubs.onlinelibrary.wiley.com/doi/10.1029/JB089iB13p11180) or [Solomon & Head, 1990](https://agupubs.onlinelibrary.wiley.com/doi/10.1029/JB095iB07p11073)). I thank [Julia Maia](https://www.oca.eu/fr/julia-maia) for having performed some further benchmarks to the literature.
 
-### Caution
-This code doesn't properly account for crust/mantle decoupling when estimating elastic strengths (see [Burov & Diament, 1984](https://agupubs.onlinelibrary.wiley.com/doi/10.1029/94JB02770)). The decoupled mantle doesn't have its own elastic core. This will be fixed soon.
-
 ## Methods
 `Curv_Moment`  Determine the bending moment given the input yield
 strength envelope and curvature.
 
-`CalcYSE_HF`  Determine the surface, crustal, and mantle heat flows, mechanical thickness, and thermal gradients from input rheology and elastic parameters.
+`Conversion_Te_HF`  Determine the surface, crustal, and mantle heat flows, mechanical thickness, and thermal gradients from input rheology and elastic parameters.
+
+`Conversion_Tprofile_Te`  Determine yield strength envelope, mechanical thickness given the input temperature profile. Elastic thickness will also be output from the assumed plate curvature.
 
 ## Example scripts
 `Mars_YSE`  Determine the surface, crust, and mantle heat flows for a given elastic thickness on Mars assuming a wet rheology for the diabase crust and olivine mantle. Plot the yield strength envelope.
+
+`Mars_T_profile_Te`  Determine the yield strength envelope, mechanical and elastic thickness for an assumed temperature profile that is linear but has a cosine tapered temperature anomaly between 20 and 50 km depth.
 
 `Venus_YSE`  Determine the surface, crust, and mantle heat flows for a given elastic thickness on Venus assuming a dry rheology for the diabase crust and olivine mantle. Plot the yield strength envelope.
 
@@ -46,4 +47,4 @@ If you would like to modify the source code, download the Displacement_strain_pl
 
 ## Cite
 You can cite the latest release of the package as:
-Adrien Broquet. AB-Ares/Te_HF_Conversion: 0.1.1 (Version 0.1.1). Zenodo. http://doi.org/10.5281/zenodo.4973893
+Adrien Broquet. AB-Ares/Te_HF_Conversion: 0.2.0 (Version 0.2.0). Zenodo. http://doi.org/10.5281/zenodo.4973893

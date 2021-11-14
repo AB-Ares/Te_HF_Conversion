@@ -10,6 +10,9 @@ Mars
 ``Mars_YSE.py``
     A script that determines the surface, crust, and mantle heat flows given the input rheology and elastic thickness on Mars. Radiogenic heating can be included, and it is possible to plot the yield strength envelope and temperature profile.
 
+``Mars_T_profile_Te``  
+    A script that determines the yield strength envelope, mechanical and elastic thickness for an assumed temperature profile that is linear but has a cosine tapered temperature anomaly between 20 and 50 km depth.
+
 Venus
 ------
 

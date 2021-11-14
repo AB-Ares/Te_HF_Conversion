@@ -1,7 +1,4 @@
-from Te_HF_Conversion import *
-
-plot_YSE = True  # Plot yield strength envelope on the fly for each tested heat flow
-plot = True  # Plot the final yield strength envelope and associated temperature profile
+from Te_HF_Conversion import Conversion_Te_HF, Planet_constants
 
 g = Planet_constants.Venus_g0
 rhobar = Planet_constants.Venus_density
@@ -24,10 +21,20 @@ k_crust = 3.0  # thermal conductivity of the crust (W m−1 K−1)
 k_mantle = 4.0  # thermal conductivity of the mantle (W m−1 K−1)
 sig_y = 50e6  # Bounding stress (Pa)
 H_c = 0.0  # Average volumetric crustal heat production (W kg-1)
-Te = 100e3  # elastic thickness (m)
-Tc = 70e3  # crustal thickness (m)
+Te = 20e3  # elastic thickness (m)
+Tc = 30e3  # crustal thickness (m)
 K_curv = 1e-7  # plate curvature (m-1)
 eps = 1e-16  # strain rate (s-1)
+
+# Heat flow bounds to be investigated to improve speed convergence
+# (if None, automatically bounded, based on the input and expected results)
+HF_min = None
+HF_max = None
+plot_YSE = False  # Plot yield strength envelope on the fly for each tested heat flow
+plot = True  # Plot the final yield strength envelope and associated temperature profile
+
+# More input parameters can be input to increase speed (see doc)
+kwargs = dict(quiet=False, plot=plot, plot_YSE=plot_YSE, HF_min=HF_min, HF_max=HF_max)
 
 Conversion_Te_HF(
     Q_diabase,
@@ -53,9 +60,5 @@ Conversion_Te_HF(
     sig_y,
     Ts,
     R_gas,
-    quiet=False,
-    plot=plot,
-    plot_YSE=plot_YSE,
-    HF_min=5,
-    HF_max=15,
+    **kwargs,
 )

@@ -19,6 +19,7 @@ wet or dry rheologies are implemented.
 from ._version import get_versions
 
 from .CalcYSE_HF import Conversion_Te_HF
+from .CalcYSE_HF import Conversion_Tprofile_Te
 from .CalcYSE_HF import Curv_Moment
 from .Planet_constants import *
 
@@ -32,5 +33,6 @@ __author__ = "Adrien Broquet"
 __all__ = [
     "Conversion_Te_HF",
     "Curv_Moment",
+    "Conversion_Tprofile_Te",
     "Planet_constants",
 ]
