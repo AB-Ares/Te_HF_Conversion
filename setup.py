@@ -14,7 +14,7 @@ install_requires = [""]
 
 setup(
     name="Te_HF_Conversion",
-    version="0.2.0",
+    version="0.2.1",
     description="Conversion of the elastic thickness of the lithosphere to the planetary heat flow.",
     long_description=long_description,
     long_description_content_type="text/markdown",

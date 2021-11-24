@@ -199,6 +199,11 @@ def Conversion_Te_HF(
        The surface temperature gradient (K km-1).
     Tm : Float
        Mechanical thickness of the lithosphere (m).
+    d_sig_tmp1_best : array, size(max_depth / step_depth)
+       The best-fitting YSE compression (Pa).
+    d_sig_tmp0_best : array, size(max_depth / step_depth)
+       The best-fitting YSE tension (Pa).
+    d_sig_tmp1_best : array, size(max_depth / step_depth)
 
     Parameters
     ----------
@@ -684,6 +689,8 @@ def Conversion_Te_HF(
         F_m_best / k_mantle,
         F_s_best / k_avg,
         Tm,
+        d_sig_tmp1_best,
+        d_sig_tmp0_best,
     )
 
 
@@ -722,6 +729,10 @@ def Conversion_Tprofile_Te(
     -------
     Te : float
        Elastic thickness of the lithosphere (m).
+    d_sig_tmp1_best : array, size(max_depth / step_depth)
+       The best-fitting YSE compression (Pa).
+    d_sig_tmp0_best : array, size(max_depth / step_depth)
+       The best-fitting YSE tension (Pa).
 
     Parameters
     ----------
@@ -818,9 +829,10 @@ def Conversion_Tprofile_Te(
     )
 
     misfit_temp = 1e50
+    decoupling_potential = False
+    decoupling = False
     prints_weak = False
     prints_decoup = False
-    decoupling_potential = False
     iter_crust_thick = np.argmin((z_profile - Tc) ** 2)
     for Te in (
         np.arange(Te_min, np.min([Te_max, max_depth]), step=Te_step) * 1e3
@@ -1118,4 +1130,4 @@ def Conversion_Tprofile_Te(
         ax2.set_title("Input temperature profile")
         plt.show()
 
-    return (Te_best,)
+    return (Te_best, d_sig_tmp1_best, d_sig_tmp0_best)
