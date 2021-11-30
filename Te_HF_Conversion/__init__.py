@@ -21,6 +21,7 @@ from ._version import get_versions
 from .CalcYSE_HF import Conversion_Te_HF
 from .CalcYSE_HF import Conversion_Tprofile_Te
 from .CalcYSE_HF import Curv_Moment
+from .CalcYSE_HF import Brittle_Strength
 from .Planet_constants import *
 
 del CalcYSE_HF
@@ -34,5 +35,6 @@ __all__ = [
     "Conversion_Te_HF",
     "Curv_Moment",
     "Conversion_Tprofile_Te",
+    "Brittle_Strength",
     "Planet_constants",
 ]
