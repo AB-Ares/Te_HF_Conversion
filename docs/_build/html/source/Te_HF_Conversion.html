@@ -91,17 +91,20 @@
 <section id="module-Te_HF_Conversion.CalcYSE_HF">
 <span id="te-hf-conversion-calcyse-hf-module"></span><h2>Te_HF_Conversion.CalcYSE_HF module<a class="headerlink" href="#module-Te_HF_Conversion.CalcYSE_HF" title="Permalink to this headline"></a></h2>
 <p>Convert the elastic thickness into
-a heat flow given the input rheology</p>
+a heat flow given the input rheology.
+Convert a temperature profile into
+a yield strength envelope and elastic
+thickness.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="Te_HF_Conversion.CalcYSE_HF.Brittle_Strength">
 <span class="sig-prename descclassname"><span class="pre">Te_HF_Conversion.CalcYSE_HF.</span></span><span class="sig-name descname"><span class="pre">Brittle_Strength</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Tc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">R_mpr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">g_surf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rhom</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rhoc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rhobar</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z_profile</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Te_HF_Conversion.CalcYSE_HF.Brittle_Strength" title="Permalink to this definition"></a></dt>
 <dd><p>Compute the Brittle strength of the lithosphere based on the
-approach of Mueller &amp; Phillips (1995)</p>
+approach of Mueller &amp; Phillips (1995).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p><ul class="simple">
-<li><p><strong>d_sig_tab1</strong> (<em>array size(depth)</em>) – Brittle yield strength envelope in compression (Pa)</p></li>
-<li><p><strong>d_sig_tab2</strong> (<em>array size(depth)</em>) – Brittle yield strength envelope in tension (Pa)</p></li>
+<li><p><strong>d_sig_tab1</strong> (<em>array size(depth)</em>) – Brittle yield strength envelope in compression (Pa).</p></li>
+<li><p><strong>d_sig_tab2</strong> (<em>array size(depth)</em>) – Brittle yield strength envelope in tension (Pa).</p></li>
 </ul>
 </p>
 </dd>
@@ -241,7 +244,7 @@ and temperature profile.</p></li>
 <dt class="sig sig-object py" id="Te_HF_Conversion.CalcYSE_HF.Curv_Moment">
 <span class="sig-prename descclassname"><span class="pre">Te_HF_Conversion.CalcYSE_HF.</span></span><span class="sig-name descname"><span class="pre">Curv_Moment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d_sig_tmp0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d_sig_tmp1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">K_curv</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">young</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">poisson</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">depth</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step_depth</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sig_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">HF</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_YSE</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">decoupling</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[6.4,</span> <span class="pre">4.8]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Te_HF_Conversion.CalcYSE_HF.Curv_Moment" title="Permalink to this definition"></a></dt>
 <dd><p>Determine the bending moment given the input yield
-strength envelope and curvature</p>
+strength envelope and curvature.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p><ul class="simple">
@@ -285,14 +288,22 @@ ax if plot_YSE.</p></li>
 <h3>Te_HF_Conversion<a class="headerlink" href="#te-hf-conversion" title="Permalink to this headline"></a></h3>
 <p>Te_HF_Conversion provides a function and an example script
 for converting a given elastic thickness of the lithosphere
-into a planetary heat flow. Radiogenic heat contribution and
-wet or dry rheologies are implemented.</p>
+into a planetary heat flow, or a temperature profile
+into a yield strength envelope and elastic thickness.
+Radiogenic heat contribution and wet or dry rheologies are
+implemented.</p>
 <blockquote>
 <div><dl class="simple">
 <dt>Conversion_Te_HF</dt><dd><p>Determine the surface, crust, and mantle heat flows
 given the input parameters.</p>
 </dd>
 <dt>Curv_Moment</dt><dd><p>Performs the  to moment calculation.</p>
+</dd>
+<dt>Conversion_Tprofile_Te</dt><dd><p>Convert a temperature profile into an
+elastic thickness and yield strength envelope.</p>
+</dd>
+<dt>Brittle_Strength</dt><dd><p>Compute the brittle part of the yield strength
+envelope based on planetary constants.</p>
 </dd>
 <dt>Planet_constants</dt><dd><p>Contains the constants used in the calculations.</p>
 </dd>
@@ -302,12 +313,12 @@ given the input parameters.</p>
 <dt class="sig sig-object py" id="Te_HF_Conversion.Brittle_Strength">
 <span class="sig-prename descclassname"><span class="pre">Te_HF_Conversion.</span></span><span class="sig-name descname"><span class="pre">Brittle_Strength</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Tc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">R_mpr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">g_surf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rhom</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rhoc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rhobar</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z_profile</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Te_HF_Conversion.Brittle_Strength" title="Permalink to this definition"></a></dt>
 <dd><p>Compute the Brittle strength of the lithosphere based on the
-approach of Mueller &amp; Phillips (1995)</p>
+approach of Mueller &amp; Phillips (1995).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p><ul class="simple">
-<li><p><strong>d_sig_tab1</strong> (<em>array size(depth)</em>) – Brittle yield strength envelope in compression (Pa)</p></li>
-<li><p><strong>d_sig_tab2</strong> (<em>array size(depth)</em>) – Brittle yield strength envelope in tension (Pa)</p></li>
+<li><p><strong>d_sig_tab1</strong> (<em>array size(depth)</em>) – Brittle yield strength envelope in compression (Pa).</p></li>
+<li><p><strong>d_sig_tab2</strong> (<em>array size(depth)</em>) – Brittle yield strength envelope in tension (Pa).</p></li>
 </ul>
 </p>
 </dd>
@@ -447,7 +458,7 @@ and temperature profile.</p></li>
 <dt class="sig sig-object py" id="Te_HF_Conversion.Curv_Moment">
 <span class="sig-prename descclassname"><span class="pre">Te_HF_Conversion.</span></span><span class="sig-name descname"><span class="pre">Curv_Moment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d_sig_tmp0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d_sig_tmp1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">K_curv</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">young</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">poisson</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">depth</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step_depth</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sig_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">HF</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_YSE</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">decoupling</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[6.4,</span> <span class="pre">4.8]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Te_HF_Conversion.Curv_Moment" title="Permalink to this definition"></a></dt>
 <dd><p>Determine the bending moment given the input yield
-strength envelope and curvature</p>
+strength envelope and curvature.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p><ul class="simple">

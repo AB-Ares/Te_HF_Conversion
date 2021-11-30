@@ -1,6 +1,9 @@
 """
 Convert the elastic thickness into
-a heat flow given the input rheology
+a heat flow given the input rheology.
+Convert a temperature profile into
+a yield strength envelope and elastic
+thickness.
 """
 
 import numpy as np
@@ -26,7 +29,7 @@ def Curv_Moment(
 ):
     """
     Determine the bending moment given the input yield
-    strength envelope and curvature
+    strength envelope and curvature.
 
     Returns
     -------
@@ -1114,14 +1117,14 @@ def Brittle_Strength(Tc, R_mpr, g_surf, rhom, rhoc, rhobar, z_profile):
 
     """
     Compute the Brittle strength of the lithosphere based on the
-    approach of Mueller & Phillips (1995)
+    approach of Mueller & Phillips (1995).
 
     Returns
     -------
     d_sig_tab1 : array size(depth)
-       Brittle yield strength envelope in compression (Pa)
+       Brittle yield strength envelope in compression (Pa).
     d_sig_tab2 : array size(depth)
-       Brittle yield strength envelope in tension (Pa)
+       Brittle yield strength envelope in tension (Pa).
 
     Parameters
     ----------
