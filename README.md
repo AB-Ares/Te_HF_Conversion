@@ -8,8 +8,11 @@ Conversion of the elastic thickness of the lithosphere to the planetary heat flo
 ## Description
 
 **Te_HF_Conversion** is a simple code that allows to:
+
 (1) Convert the elastic thickness of the lithosphere to planetary heat flow (and a yield strength envelope) given several input parameters including crustal thickness, strain rate, or radiogenic heating.
+
 (2) Retrieve the elastic thickness (and a yield strength envelope) of the lithosphere based on a temperature profile. 
+
 The model makes use of the equating bending moment approach of [McNutt (1984)](https://agupubs.onlinelibrary.wiley.com/doi/10.1029/JB089iB13p11180) and has been used in [Broquet et al (2020)](https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2019GL086746).
 
 ### Benchmarks
@@ -22,6 +25,8 @@ strength envelope and curvature.
 `Conversion_Te_HF`  Determine the surface, crustal, and mantle heat flows, mechanical thickness, and thermal gradients from input rheology and elastic parameters.
 
 `Conversion_Tprofile_Te`  Determine yield strength envelope, mechanical thickness given the input temperature profile. Elastic thickness will also be output from the assumed plate curvature.
+
+`Brittle_Strength` Compute the brittle part of the yield strength envelope based on planetary constants.
 
 ## Example scripts
 `Mars_YSE`  Determine the surface, crust, and mantle heat flows for a given elastic thickness on Mars assuming a wet rheology for the diabase crust and olivine mantle. Plot the yield strength envelope.
