@@ -43,9 +43,9 @@ Mars_mpr = 3389.500e3
 # Mass (kg)
 Mars_mass = Mars_gm / G_cst
 # Gravitational attraction (m s-2)
-Mars_g0 = Mars_gm / Mars_mpr ** 2
+Mars_g0 = Mars_gm / Mars_mpr**2
 # Average density  (kg m-3)
-Mars_density = Mars_mass * 3.0 / 4.0 / np.pi / (Mars_mpr ** 3)
+Mars_density = Mars_mass * 3.0 / 4.0 / np.pi / (Mars_mpr**3)
 
 # Venus constants
 # gm (m3 s-2) – Konopliv et al. (1999)
@@ -55,6 +55,6 @@ Venus_mpr = 6051.878e3
 # Mass (kg)
 Venus_mass = Venus_gm / G_cst
 # Gravitational attraction (m s-2)
-Venus_g0 = Venus_gm / Venus_mpr ** 2
+Venus_g0 = Venus_gm / Venus_mpr**2
 # Average density (kg m-3)
-Venus_density = Venus_mass * 3.0 / 4.0 / np.pi / (Venus_mpr ** 3)
+Venus_density = Venus_mass * 3.0 / 4.0 / np.pi / (Venus_mpr**3)

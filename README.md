@@ -55,4 +55,4 @@ If you would like to modify the source code, download the Displacement_strain_pl
 
 ## Cite
 You can cite the latest release of the package as:
-Adrien Broquet. AB-Ares/Te_HF_Conversion: 0.2.2 (Version 0.2.2). Zenodo. http://doi.org/10.5281/zenodo.4973893
+Adrien Broquet. AB-Ares/Te_HF_Conversion: 0.2.3 (Version 0.2.3). Zenodo. http://doi.org/10.5281/zenodo.4973893

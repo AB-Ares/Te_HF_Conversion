@@ -21,6 +21,7 @@ def Curv_Moment(
     step_depth,
     sig_y,
     HF=0,
+    neutralfib=None,
     plot_YSE=False,
     decoupling=False,
     show=True,
@@ -62,6 +63,8 @@ def Curv_Moment(
        Bounding stress (Pa).
     HF : float, optional, default = 0
        The input mantle heat flow (W m-2).
+    neutralfib : int, optional, default = None
+        Neutral fiber index of the previous interation.
     plot_YSE : boolean, optional, default = False
        If true, plot the yield strength envelope
     decoupling : boolean, optional, default = False
@@ -75,14 +78,44 @@ def Curv_Moment(
     figsize : tuple, optional, default = mpl.rcParams['figure.figsize']
        Size of the output figure.
     """
-    NetAxial = 0
-    neutralfib = 0
-    a = -1
+
     first = False
-    for i in depth:
-        a += 1
-        # Find neutral fiber
-        sig_ela = (-young * K_curv * (depth - i)) / (1.0 - poisson ** 2)
+    if neutralfib is None:
+        for i in depth:
+            # Find neutral fiber
+            sig_ela = (-young * K_curv * (depth - i)) / (1.0 - poisson**2)
+            d_sig_tab1 = np.minimum(sig_ela[:], d_sig_tmp0[:])
+            d_sig_tab2 = np.maximum(sig_ela[:], d_sig_tmp1[:])
+            if K_curv >= 0:
+                # elastic core limit & neutral fiber
+                bound2 = np.min(np.where(sig_ela == 0))
+                d_sig_tab1[bound2:] = 0.0
+                d_sig_tab2[:bound2] = 0.0
+
+                NetAxial = np.trapz(d_sig_tab1[:bound2], dx=step_depth) + np.trapz(
+                    d_sig_tab2[bound2:], dx=step_depth
+                )
+            else:
+                # elastic core limit & neutral fiber
+                bound2 = np.min(np.where(sig_ela == 0))
+                d_sig_tab1[:bound2] = 0.0
+                d_sig_tab2[bound2:] = 0.0
+
+                NetAxial = np.trapz(d_sig_tab2[:bound2], dx=step_depth) + np.trapz(
+                    d_sig_tab1[bound2:], dx=step_depth
+                )
+
+            if not first and NetAxial != 0:
+                tempAx = NetAxial
+                first = True
+            if first and tempAx < 0 and NetAxial > 0:
+                neutralfib = i
+                break
+            elif first and tempAx > 0 and NetAxial < 0:
+                neutralfib = i
+                break
+    else:
+        sig_ela = (-young * K_curv * (depth - neutralfib)) / (1.0 - poisson**2)
         d_sig_tab1 = np.minimum(sig_ela[:], d_sig_tmp0[:])
         d_sig_tab2 = np.maximum(sig_ela[:], d_sig_tmp1[:])
         if K_curv >= 0:
@@ -90,38 +123,14 @@ def Curv_Moment(
             bound2 = np.min(np.where(sig_ela == 0))
             d_sig_tab1[bound2:] = 0.0
             d_sig_tab2[:bound2] = 0.0
-
-            NetAxial = np.trapz(d_sig_tab1[:bound2], dx=step_depth) + np.trapz(
-                d_sig_tab2[bound2:], dx=step_depth
-            )
         else:
             # elastic core limit & neutral fiber
             bound2 = np.min(np.where(sig_ela == 0))
             d_sig_tab1[:bound2] = 0.0
             d_sig_tab2[bound2:] = 0.0
 
-            NetAxial = np.trapz(d_sig_tab2[:bound2], dx=step_depth) + np.trapz(
-                d_sig_tab1[bound2:], dx=step_depth
-            )
-
-        if not first and NetAxial != 0:
-            tempAx = NetAxial
-            first = True
-        if first and tempAx < 0 and NetAxial > 0:
-            neutralfib = i
-            break
-        elif first and tempAx > 0 and NetAxial < 0:
-            neutralfib = i
-            break
-
-    d_sig_tab3 = np.zeros_like(d_sig_tab1)
-    d_sig_tab4 = np.zeros_like(d_sig_tab1)
-
-    a = -1  # Update YSE with elastic limit
-    for z in depth:
-        a += 1
-        d_sig_tab3[a] = d_sig_tab1[a] * (z - neutralfib / 2.0)
-        d_sig_tab4[a] = d_sig_tab2[a] * (z - neutralfib / 2.0)
+    d_sig_tab3 = d_sig_tab1 * (depth - neutralfib / 2.0)
+    d_sig_tab4 = d_sig_tab2 * (depth - neutralfib / 2.0)
 
     Mx = np.trapz(d_sig_tab3, dx=step_depth) + np.trapz(d_sig_tab4, dx=step_depth)
 
@@ -134,12 +143,11 @@ def Curv_Moment(
         ax.plot(d_sig_tab1, depth_km, color="orange", label="Integrated tension")
         ax.plot(d_sig_tab2, depth_km, "b", label="Integrated compression")
         ax.plot(sig_ela, depth_km, "--r", label="Curvature")
-        if not show:
+        if show:
             ax.set_xlim(
                 1.5 * np.min([d_sig_tmp1.min(), d_sig_tab2.min()]),
                 1.5 * np.max([d_sig_tmp0.max(), d_sig_tmp1.max()]),
             )
-        else:
             ax.axvline(sig_y, label="Bounding stress")
             ax.axvline(-sig_y)
             ax.set_ylabel("Depth (km)")
@@ -150,7 +158,7 @@ def Curv_Moment(
                 ax.set_title("Mantle heat flow %s (mW m-2)" % (HF * 1e3))
             plt.show()
 
-    return Mx, d_sig_tab1, d_sig_tab2, sig_ela
+    return Mx, d_sig_tab1, d_sig_tab2, sig_ela, neutralfib
 
 
 def Conversion_Te_HF(
@@ -309,10 +317,10 @@ def Conversion_Te_HF(
     # which can vary the elastic thickness by about 30%, hence the derived heat flow
     k_avg = (k_mantle * (Te - Tc) + k_crust * Tc) / Te  # Linear avg
     if Te > Tc:  # Mantle rheology
-        Tmax = (Q_mantle / R_gas) / (np.log(A_mantle * (sig_y ** n_mantle) / eps))
+        Tmax = (Q_mantle / R_gas) / (np.log(A_mantle * (sig_y**n_mantle) / eps))
         F = 1e3 * k_avg * (Tmax - Ts) / Te
     else:  # Crustal rheology
-        Tmax = (Q_crust / R_gas) / (np.log(A_crust * (sig_y ** n_crust) / eps))
+        Tmax = (Q_crust / R_gas) / (np.log(A_crust * (sig_y**n_crust) / eps))
         F = 1e3 * k_crust * (Tmax - Ts) / Te
 
     if not quiet:
@@ -349,7 +357,7 @@ def Conversion_Te_HF(
     T_z_tab = np.zeros_like(depths_arr)
 
     # Integration of the elastic strength of the lithosphere
-    d_sig_tab[2, :] = -(K_curv * young) / float(1.0 - poisson ** 2)  # Pa
+    d_sig_tab[2, :] = -(K_curv * young) / float(1.0 - poisson**2)  # Pa
     a = -1
     for j in depths_arr:
         a = a + 1
@@ -364,7 +372,7 @@ def Conversion_Te_HF(
     )  # The analytic formula for M_el is not used here.
     # as we use trapz for M_real, we use it to compute M_el
     # but in practice M_el integrated and the analytic formula are close
-    M_el_analyt = K_curv * young * Te ** 3 / (12.0 * float(1.0 - poisson ** 2))
+    M_el_analyt = K_curv * young * Te**3 / (12.0 * float(1.0 - poisson**2))
     if not quiet:
         print(
             "Numerical integration of M_el vs exact integration M_el",
@@ -393,8 +401,8 @@ def Conversion_Te_HF(
     )
 
     for HF in HF_arr:  # HF : mw/m2
-        d_sig_tab[0, :] = d_sig_tab0B.copy()
-        d_sig_tab[1, :] = d_sig_tab1B.copy()
+        d_sig_tab[0, :] = d_sig_tab0B
+        d_sig_tab[1, :] = d_sig_tab1B
         duct_fail_c = False
         duct_fail_m = False
         F = float(HF / 1e3)
@@ -403,7 +411,7 @@ def Conversion_Te_HF(
             # Temperature
             if z <= Tc:
                 Fs = F + rhoc * H_c * z
-                T_z = Ts + Fs * z / k_crust - rhoc * H_c * z ** 2 / (2 * k_crust)
+                T_z = Ts + Fs * z / k_crust - rhoc * H_c * z**2 / (2 * k_crust)
 
                 # Onset of ductile deformation
                 ductile_sig = (eps / A_crust) ** (1.0 / float(n_crust)) * np.exp(
@@ -421,7 +429,7 @@ def Conversion_Te_HF(
                     i_duct_c = iter
                     i_crust_thick = np.argmin((depths_arr - Tc) ** 2)
             else:
-                T_z_c = Ts + Fs * Tc / k_crust - rhoc * H_c * Tc ** 2 / (2 * k_crust)
+                T_z_c = Ts + Fs * Tc / k_crust - rhoc * H_c * Tc**2 / (2 * k_crust)
                 T_z = T_z_c + F / k_mantle * (z - Tc)
 
                 # Onset of ductile deformation
@@ -454,9 +462,9 @@ def Conversion_Te_HF(
             d_sig_tab[1, i_duct_c:i_crust_thick][depth_c1] = 0.0
 
         if not decoupling_potential:
-            M_real, d_sig_tab1, d_sig_tab2, sig_ela = Curv_Moment(
-                d_sig_tab[0, :].copy(),
-                d_sig_tab[1, :].copy(),
+            M_real, d_sig_tab1, d_sig_tab2, sig_ela, neutralfib_nd = Curv_Moment(
+                d_sig_tab[0, :],
+                d_sig_tab[1, :],
                 K_curv,
                 young,
                 poisson,
@@ -497,6 +505,8 @@ def Conversion_Te_HF(
 
             d_sig_tab_m0[: i_duct_base_c0 + i_duct_c] = 0.0
             d_sig_tab_m1[: i_duct_base_c1 + i_duct_c] = 0.0
+            sum_d0_m = np.sum(d_sig_tab_m0) != 0
+            sum_d1_m = np.sum(d_sig_tab_m1) != 0
 
             if plot_YSE:
                 f, ax = plt.subplots(1, 1, figsize=figsize)
@@ -508,25 +518,14 @@ def Conversion_Te_HF(
                 plot_YSE=plot_YSE, HF=F, decoupling=decoupling_potential, ax=ax
             )
 
-            M_real_c, d_sig_tab1_c, d_sig_tab2_c, sig_ela_c = Curv_Moment(
-                d_sig_tab_c0.copy(),
-                d_sig_tab_c1.copy(),
-                *args_M_real,
-                **args_M_real_d,
-                show=False,
-            )
-
-            M_real_m, d_sig_tab1_m, d_sig_tab2_m, sig_ela_m = Curv_Moment(
-                d_sig_tab_m0.copy(),
-                d_sig_tab_m1.copy(),
-                *args_M_real,
-                **args_M_real_d,
-                show=plot_YSE,
-            )
-            plotted = True
-
-            if M_real_m != 0:
-                M_real = M_real_c + M_real_m
+            if sum_d0_m and sum_d1_m:
+                M_real_m, d_sig_tab1_m, d_sig_tab2_m, sig_ela_m, _ = Curv_Moment(
+                    d_sig_tab_m0,
+                    d_sig_tab_m1,
+                    *args_M_real,
+                    **args_M_real_d,
+                    show=False,
+                )
                 decoupling = True
                 if not prints_decoup:
                     prints_decoup = True
@@ -535,24 +534,37 @@ def Conversion_Te_HF(
                             "## Beginning of decoupling between the crust and mantle ##"
                         )
             else:
+                M_real_m = 0
                 decoupling = False
                 decoupling_potential = False
                 if not quiet and not prints_decoup_m and prints_decoup:
                     print("## Mantle layer has no more strength ##")
                     prints_decoup_m = True
+
+            M_real_c, d_sig_tab1_c, d_sig_tab2_c, sig_ela_c, neutralfib = Curv_Moment(
+                d_sig_tab_c0,
+                d_sig_tab_c1,
+                *args_M_real,
+                **args_M_real_d,
+                neutralfib=neutralfib_nd if not decoupling else None,
+                show=plot_YSE,
+            )
+            plotted = True
+            M_real = M_real_c + M_real_m
         else:
             plotted = False
 
         if not decoupling:
-            M_real, d_sig_tab1, d_sig_tab2, sig_ela = Curv_Moment(
-                d_sig_tab[0, :].copy(),
-                d_sig_tab[1, :].copy(),
+            M_real, d_sig_tab1, d_sig_tab2, sig_ela, _ = Curv_Moment(
+                d_sig_tab[0, :],
+                d_sig_tab[1, :],
                 K_curv,
                 young,
                 poisson,
                 depths_arr,
                 step_depth,
                 sig_y,
+                neutralfib=neutralfib_nd,
                 plot_YSE=not plotted and plot_YSE,
                 HF=F,
             )
@@ -605,7 +617,7 @@ def Conversion_Te_HF(
             Tm2 = (
                 depths_arr[i_duct_m_best:][depth_m0_best][0] - depths_arr[i_duct_m_best]
             )
-            Tm = (Tm1 ** 3 + Tm2 ** 3) ** (1 / 3)  # Burov & Diament 1995
+            Tm = (Tm1**3 + Tm2**3) ** (1 / 3)  # Burov & Diament 1995
         else:
             Tm = depths_arr[find_Tm][0]
     F_c_best = F_s_best - F_m_best
@@ -872,9 +884,9 @@ def Conversion_Tprofile_Te(
         d_sig_tab[0, i_duct_c:i_crust_thick][depth_c0] = 0.0
         d_sig_tab[1, i_duct_c:i_crust_thick][depth_c1] = 0.0
 
-    M_real, d_sig_tab1, d_sig_tab2, sig_ela = Curv_Moment(
-        d_sig_tab[0, :].copy(),
-        d_sig_tab[1, :].copy(),
+    M_real, d_sig_tab1, d_sig_tab2, sig_ela, _ = Curv_Moment(
+        d_sig_tab[0, :],
+        d_sig_tab[1, :],
         K_curv,
         young,
         poisson,
@@ -937,9 +949,8 @@ def Conversion_Tprofile_Te(
                     d_sig_tab1_tmp,
                     d_sig_tab2_tmp,
                     sig_ela_tmp,
-                ) = Curv_Moment(
-                    d_sig_tab_tmp0.copy(), d_sig_tab_tmp1.copy(), *args_M_real
-                )
+                    _,
+                ) = Curv_Moment(d_sig_tab_tmp0, d_sig_tab_tmp1, *args_M_real)
                 M_real += M_real_tmp
                 d_sig_tab1_decoup += d_sig_tab1_tmp
                 d_sig_tab2_decoup += d_sig_tab2_tmp
@@ -968,7 +979,7 @@ def Conversion_Tprofile_Te(
         np.arange(Te_min, np.min([Te_max, max_depth]), step=Te_step) * 1e3
     ):  # Convert to m
         # Integration of the elastic strength of the lithosphere
-        d_sig_tab[2, :] = -(K_curv * young) / float(1.0 - poisson ** 2)  # Pa
+        d_sig_tab[2, :] = -(K_curv * young) / float(1.0 - poisson**2)  # Pa
         a = -1
         for j in z_profile:
             a = a + 1
@@ -983,7 +994,7 @@ def Conversion_Tprofile_Te(
         )  # The analytic formula for M_el is not used here.
         # as we use trapz for M_real, we use it to compute M_el
         # but in practice M_el integrated and the analytic formula are close
-        M_el_analyt = K_curv * young * Te ** 3 / (12.0 * float(1.0 - poisson ** 2))
+        M_el_analyt = K_curv * young * Te**3 / (12.0 * float(1.0 - poisson**2))
         if not quiet:
             print(
                 "Numerical integration of M_el vs exact integration M_el",
@@ -1151,36 +1162,39 @@ def Brittle_Strength(Tc, R_mpr, g_surf, rhom, rhoc, rhobar, z_profile):
         / ((R_mpr - Tc) / R_mpr) ** 2
     )
 
-    d_sig_tab_o = np.zeros((2, np.size(z_profile)))
-    for iter, z in enumerate(z_profile):
-        if z <= Tc:
-            g_depth = (
-                g_surf
-                * (1.0 + (((R_mpr - z) / R_mpr) ** 3 - 1) * rhoc / rhobar)
-                / ((R_mpr - z) / R_mpr) ** 2
-            )
-        else:
-            g_depth = (
-                g_surf
-                * (1.0 + (((R_mpr - z) / R_mpr) ** 3 - 1) * rhom / rhobar)
-                / ((R_mpr - z) / R_mpr) ** 2
-            )
+    z_crust_ix = z_profile <= Tc
+    z_mantle_idx = z_profile > Tc
+    z_crust = z_profile[z_crust_ix]
+    z_mantle = z_profile[z_mantle_idx]
 
-        # lithostatic pressure
-        if z <= Tc:
-            sig_v = rhoc * g_depth * z
-        else:
-            sig_v = rhoc * g_crust * Tc + rhom * g_depth * (z - Tc)
-        sig_v *= 1e-6  # MPa
-        # Tension
-        if sig_v <= 529.9:  # Mueller & Phillips 1995
-            d_sig_tab_o[0, iter] = float(0.786 * sig_v)
-        else:
-            d_sig_tab_o[0, iter] = float(56.7 + 0.679 * sig_v)
-        # Compression
-        if sig_v <= 113.2:
-            d_sig_tab_o[1, iter] = float(-3.68 * sig_v)
-        else:
-            d_sig_tab_o[1, iter] = float(-176.6 - 2.12 * sig_v)
+    g_depth = np.hstack(
+        (
+            g_surf
+            * (1.0 + (((R_mpr - z_crust) / R_mpr) ** 3 - 1) * rhoc / rhobar)
+            / ((R_mpr - z_crust) / R_mpr) ** 2,  # crust
+            g_surf
+            * (1.0 + (((R_mpr - z_mantle) / R_mpr) ** 3 - 1) * rhom / rhobar)
+            / ((R_mpr - z_mantle) / R_mpr) ** 2,
+        )
+    )  # mantle
 
-    return d_sig_tab_o[0, :] * 1e6, d_sig_tab_o[1, :] * 1e6
+    sig_v = (
+        np.hstack(
+            (
+                rhoc * g_depth[z_crust_ix] * z_crust,  # crust
+                rhoc * g_crust * Tc + rhom * g_depth[z_mantle_idx] * (z_mantle - Tc),
+            )  # mantle
+        )
+        * 1e-6
+    )
+
+    Tension = (
+        np.hstack((0.786 * sig_v[sig_v <= 529.9], 56.7 + 0.679 * sig_v[sig_v > 529.9]))
+        * 1e6
+    )
+    Compression = (
+        np.hstack((-3.68 * sig_v[sig_v <= 113.2], -176.6 - 2.12 * sig_v[sig_v > 113.2]))
+        * 1e6
+    )
+
+    return Tension, Compression
