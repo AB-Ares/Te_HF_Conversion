@@ -42,6 +42,8 @@ def Curv_Moment(
        Integrated part of the yield strength envelope in tension (Pa)
     sig_ela : array size(depth)
        Integrated elastic part of the yield strength envelope (Pa)
+    neutralfib : float
+        Neutral fiber index to be used for the next iteration
 
     Parameters
     ----------
