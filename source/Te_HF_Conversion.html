@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Te_HF_Conversion package &mdash; Te_HF_Conversion</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -30,7 +29,7 @@
             <img src="../_static/bender.jpeg" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.2.2
+                0.2.3
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -83,12 +82,12 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="te-hf-conversion-package">
+  <div class="section" id="te-hf-conversion-package">
 <h1>Te_HF_Conversion package<a class="headerlink" href="#te-hf-conversion-package" title="Permalink to this headline"></a></h1>
-<section id="submodules">
+<div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline"></a></h2>
-</section>
-<section id="module-Te_HF_Conversion.CalcYSE_HF">
+</div>
+<div class="section" id="module-Te_HF_Conversion.CalcYSE_HF">
 <span id="te-hf-conversion-calcyse-hf-module"></span><h2>Te_HF_Conversion.CalcYSE_HF module<a class="headerlink" href="#module-Te_HF_Conversion.CalcYSE_HF" title="Permalink to this headline"></a></h2>
 <p>Convert the elastic thickness into
 a heat flow given the input rheology.
@@ -242,7 +241,7 @@ and temperature profile.</p></li>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="Te_HF_Conversion.CalcYSE_HF.Curv_Moment">
-<span class="sig-prename descclassname"><span class="pre">Te_HF_Conversion.CalcYSE_HF.</span></span><span class="sig-name descname"><span class="pre">Curv_Moment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d_sig_tmp0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d_sig_tmp1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">K_curv</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">young</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">poisson</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">depth</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step_depth</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sig_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">HF</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_YSE</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">decoupling</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[6.4,</span> <span class="pre">4.8]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Te_HF_Conversion.CalcYSE_HF.Curv_Moment" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">Te_HF_Conversion.CalcYSE_HF.</span></span><span class="sig-name descname"><span class="pre">Curv_Moment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d_sig_tmp0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d_sig_tmp1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">K_curv</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">young</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">poisson</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">depth</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step_depth</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sig_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">HF</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">neutralfib</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_YSE</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">decoupling</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[6.4,</span> <span class="pre">4.8]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Te_HF_Conversion.CalcYSE_HF.Curv_Moment" title="Permalink to this definition"></a></dt>
 <dd><p>Determine the bending moment given the input yield
 strength envelope and curvature.</p>
 <dl class="field-list simple">
@@ -252,6 +251,7 @@ strength envelope and curvature.</p>
 <li><p><strong>d_sig_tab1</strong> (<em>array size(depth)</em>) – Integrated part of the yield strength envelope in compression (Pa)</p></li>
 <li><p><strong>d_sig_tab2</strong> (<em>array size(depth)</em>) – Integrated part of the yield strength envelope in tension (Pa)</p></li>
 <li><p><strong>sig_ela</strong> (<em>array size(depth)</em>) – Integrated elastic part of the yield strength envelope (Pa)</p></li>
+<li><p><strong>neutralfib</strong> (<em>float</em>) – Neutral fiber index to be used for the next iteration</p></li>
 </ul>
 </p>
 </dd>
@@ -266,6 +266,7 @@ strength envelope and curvature.</p>
 <li><p><strong>step_depth</strong> (<em>float</em>) – Iteration depth step for the integration.</p></li>
 <li><p><strong>sig_y</strong> (<em>float</em>) – Bounding stress (Pa).</p></li>
 <li><p><strong>HF</strong> (<em>float</em><em>, </em><em>optional</em><em>, </em><em>default = 0</em>) – The input mantle heat flow (W m-2).</p></li>
+<li><p><strong>neutralfib</strong> (<em>int</em><em>, </em><em>optional</em><em>, </em><em>default = None</em>) – Neutral fiber index of the previous interation.</p></li>
 <li><p><strong>plot_YSE</strong> (<em>boolean</em><em>, </em><em>optional</em><em>, </em><em>default = False</em>) – If true, plot the yield strength envelope</p></li>
 <li><p><strong>decoupling</strong> (<em>boolean</em><em>, </em><em>optional</em><em>, </em><em>default = False</em>) – If true, the rheology is decoupled and we plot 2 sets
 of curvatures on ax if plot_YSE.</p></li>
@@ -278,13 +279,13 @@ ax if plot_YSE.</p></li>
 </dl>
 </dd></dl>
 
-</section>
-<section id="module-Te_HF_Conversion.Planet_constants">
+</div>
+<div class="section" id="module-Te_HF_Conversion.Planet_constants">
 <span id="te-hf-conversion-planet-constants-module"></span><h2>Te_HF_Conversion.Planet_constants module<a class="headerlink" href="#module-Te_HF_Conversion.Planet_constants" title="Permalink to this headline"></a></h2>
-</section>
-<section id="module-Te_HF_Conversion">
+</div>
+<div class="section" id="module-Te_HF_Conversion">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-Te_HF_Conversion" title="Permalink to this headline"></a></h2>
-<section id="te-hf-conversion">
+<div class="section" id="te-hf-conversion">
 <h3>Te_HF_Conversion<a class="headerlink" href="#te-hf-conversion" title="Permalink to this headline"></a></h3>
 <p>Te_HF_Conversion provides a function and an example script
 for converting a given elastic thickness of the lithosphere
@@ -456,7 +457,7 @@ and temperature profile.</p></li>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="Te_HF_Conversion.Curv_Moment">
-<span class="sig-prename descclassname"><span class="pre">Te_HF_Conversion.</span></span><span class="sig-name descname"><span class="pre">Curv_Moment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d_sig_tmp0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d_sig_tmp1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">K_curv</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">young</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">poisson</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">depth</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step_depth</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sig_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">HF</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_YSE</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">decoupling</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[6.4,</span> <span class="pre">4.8]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Te_HF_Conversion.Curv_Moment" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">Te_HF_Conversion.</span></span><span class="sig-name descname"><span class="pre">Curv_Moment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d_sig_tmp0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d_sig_tmp1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">K_curv</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">young</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">poisson</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">depth</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step_depth</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sig_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">HF</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">neutralfib</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_YSE</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">decoupling</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[6.4,</span> <span class="pre">4.8]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Te_HF_Conversion.Curv_Moment" title="Permalink to this definition"></a></dt>
 <dd><p>Determine the bending moment given the input yield
 strength envelope and curvature.</p>
 <dl class="field-list simple">
@@ -466,6 +467,7 @@ strength envelope and curvature.</p>
 <li><p><strong>d_sig_tab1</strong> (<em>array size(depth)</em>) – Integrated part of the yield strength envelope in compression (Pa)</p></li>
 <li><p><strong>d_sig_tab2</strong> (<em>array size(depth)</em>) – Integrated part of the yield strength envelope in tension (Pa)</p></li>
 <li><p><strong>sig_ela</strong> (<em>array size(depth)</em>) – Integrated elastic part of the yield strength envelope (Pa)</p></li>
+<li><p><strong>neutralfib</strong> (<em>float</em>) – Neutral fiber index to be used for the next iteration</p></li>
 </ul>
 </p>
 </dd>
@@ -480,6 +482,7 @@ strength envelope and curvature.</p>
 <li><p><strong>step_depth</strong> (<em>float</em>) – Iteration depth step for the integration.</p></li>
 <li><p><strong>sig_y</strong> (<em>float</em>) – Bounding stress (Pa).</p></li>
 <li><p><strong>HF</strong> (<em>float</em><em>, </em><em>optional</em><em>, </em><em>default = 0</em>) – The input mantle heat flow (W m-2).</p></li>
+<li><p><strong>neutralfib</strong> (<em>int</em><em>, </em><em>optional</em><em>, </em><em>default = None</em>) – Neutral fiber index of the previous interation.</p></li>
 <li><p><strong>plot_YSE</strong> (<em>boolean</em><em>, </em><em>optional</em><em>, </em><em>default = False</em>) – If true, plot the yield strength envelope</p></li>
 <li><p><strong>decoupling</strong> (<em>boolean</em><em>, </em><em>optional</em><em>, </em><em>default = False</em>) – If true, the rheology is decoupled and we plot 2 sets
 of curvatures on ax if plot_YSE.</p></li>
@@ -492,9 +495,9 @@ ax if plot_YSE.</p></li>
 </dl>
 </dd></dl>
 
-</section>
-</section>
-</section>
+</div>
+</div>
+</div>
 
 
            </div>
