@@ -13,7 +13,7 @@ Elastic thickness of the lithosphere, yield strength envelope, and heat flow cal
 
 (2) Retrieve the elastic thickness (or mechanical thickness, and a yield strength envelope) of the lithosphere based on a temperature profile. 
 
-The model makes use of the equating bending moment approach of [McNutt (1984)](https://agupubs.onlinelibrary.wiley.com/doi/10.1029/JB089iB13p11180) and has been used in [Broquet et al (2020)](https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2019GL086746).
+The model makes use of the equating bending moment approach of [McNutt (1984)](https://agupubs.onlinelibrary.wiley.com/doi/10.1029/JB089iB13p11180) and has been used in [Broquet et al (2020](https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2019GL086746),[2021)](https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2020JE006730), or [Maia & Wieczorek (2022)](https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2021JE007004).
 
 ### Benchmarks
 Heat flow calculations have been benchmarked to various studies (e.g., [McNutt, 1984](https://agupubs.onlinelibrary.wiley.com/doi/10.1029/JB089iB13p11180) or [Solomon & Head, 1990](https://agupubs.onlinelibrary.wiley.com/doi/10.1029/JB095iB07p11073)). I thank [Julia Maia](https://www.oca.eu/fr/julia-maia) for having performed some further benchmarks to the literature.
