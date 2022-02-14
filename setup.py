@@ -15,7 +15,7 @@ install_requires = ["numpy", "matplotlib"]
 setup(
     name="Te_HF_Conversion",
     version="0.2.3",
-    description="Conversion of the elastic thickness of the lithosphere to the planetary heat flow.",
+    description="Elastic thickness of the lithosphere, yield strength envelope, and heat flow calculations.",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/AB-Ares/Te_HF_Conversion",
