@@ -7,7 +7,7 @@ Elastic thickness of the lithosphere, yield strength envelope, and heat flow cal
 
 ## Description
 
-**Te_HF_Conversion** is a simple code that allows to:
+**Te_HF_Conversion (TeHF)** is a simple code that allows to:
 
 (1) Convert the elastic thickness of the lithosphere to planetary heat flow (and a yield strength envelope) given several input parameters including crustal thickness, strain rate, or radiogenic heating.
 
@@ -51,8 +51,20 @@ If you would like to modify the source code, download the Displacement_strain_pl
 ```
 
 ## Author
-[Adrien Broquet](https://www.oca.eu/fr/adrien-broquet) (adrien.broquet@oca.eu)
+[Adrien Broquet](https://ab-ares.github.io/website/) (adrien.broquet@dlr.de)
 
 ## Cite
-You can cite the latest release of the package as:
+If you use the package, please cite the latest release as:
 Adrien Broquet. AB-Ares/Te_HF_Conversion: 0.2.3 (Version 0.2.3). Zenodo. http://doi.org/10.5281/zenodo.4973893
+
+This package was created for [Broquet et al., 2020](https://doi.org/10.1029/2019GL086746), which you can also cite as
+```
+    @article{Broquet2020,
+    author = {Broquet, A. and Wieczorek, M. A. and Fa, W.},
+    title = {Flexure of the Lithosphere Beneath the North Polar Cap of Mars: Implications for Ice Composition and Heat Flow},
+    journal = {Geophysical Research Letters},
+    volume = {47},
+    number = {5},
+    doi = {https://doi.org/10.1029/2019GL086746},
+    year = {2020}}
+```
