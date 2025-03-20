@@ -1,19 +1,23 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="../">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Te_HF_Conversion package &mdash; Te_HF_Conversion</title>
-      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+
+  
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/doctools.js"></script>
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -25,15 +29,19 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> Te_HF_Conversion
-            <img src="../_static/bender.jpeg" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Te_HF_Conversion
+              <img src="../_static/bender.jpeg" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.2.3
+                0.2.4
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -49,10 +57,20 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Te_HF_Conversion package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-Te_HF_Conversion.CalcYSE_HF">Te_HF_Conversion.CalcYSE_HF module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-Te_HF_Conversion.CalcYSE_HF">Te_HF_Conversion.CalcYSE_HF module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Te_HF_Conversion.CalcYSE_HF.Brittle_Strength"><code class="docutils literal notranslate"><span class="pre">Brittle_Strength()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Te_HF_Conversion.CalcYSE_HF.Conversion_Te_HF"><code class="docutils literal notranslate"><span class="pre">Conversion_Te_HF()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Te_HF_Conversion.CalcYSE_HF.Conversion_Tprofile_Te"><code class="docutils literal notranslate"><span class="pre">Conversion_Tprofile_Te()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Te_HF_Conversion.CalcYSE_HF.Curv_Moment"><code class="docutils literal notranslate"><span class="pre">Curv_Moment()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#module-Te_HF_Conversion.Planet_constants">Te_HF_Conversion.Planet_constants module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-Te_HF_Conversion">Module contents</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#te-hf-conversion">Te_HF_Conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Te_HF_Conversion.Brittle_Strength"><code class="docutils literal notranslate"><span class="pre">Brittle_Strength()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Te_HF_Conversion.Conversion_Te_HF"><code class="docutils literal notranslate"><span class="pre">Conversion_Te_HF()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Te_HF_Conversion.Conversion_Tprofile_Te"><code class="docutils literal notranslate"><span class="pre">Conversion_Tprofile_Te()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Te_HF_Conversion.Curv_Moment"><code class="docutils literal notranslate"><span class="pre">Curv_Moment()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -72,8 +90,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Te_HF_Conversion package</li>
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Te_HF_Conversion package</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -82,13 +100,13 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="te-hf-conversion-package">
-<h1>Te_HF_Conversion package<a class="headerlink" href="#te-hf-conversion-package" title="Permalink to this headline"></a></h1>
-<div class="section" id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline"></a></h2>
-</div>
-<div class="section" id="module-Te_HF_Conversion.CalcYSE_HF">
-<span id="te-hf-conversion-calcyse-hf-module"></span><h2>Te_HF_Conversion.CalcYSE_HF module<a class="headerlink" href="#module-Te_HF_Conversion.CalcYSE_HF" title="Permalink to this headline"></a></h2>
+  <section id="te-hf-conversion-package">
+<h1>Te_HF_Conversion package<a class="headerlink" href="#te-hf-conversion-package" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-Te_HF_Conversion.CalcYSE_HF">
+<span id="te-hf-conversion-calcyse-hf-module"></span><h2>Te_HF_Conversion.CalcYSE_HF module<a class="headerlink" href="#module-Te_HF_Conversion.CalcYSE_HF" title="Link to this heading"></a></h2>
 <p>Convert the elastic thickness into
 a heat flow given the input rheology.
 Convert a temperature profile into
@@ -96,18 +114,18 @@ a yield strength envelope and elastic
 thickness.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="Te_HF_Conversion.CalcYSE_HF.Brittle_Strength">
-<span class="sig-prename descclassname"><span class="pre">Te_HF_Conversion.CalcYSE_HF.</span></span><span class="sig-name descname"><span class="pre">Brittle_Strength</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Tc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">R_mpr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">g_surf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rhom</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rhoc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rhobar</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z_profile</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Te_HF_Conversion.CalcYSE_HF.Brittle_Strength" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">Te_HF_Conversion.CalcYSE_HF.</span></span><span class="sig-name descname"><span class="pre">Brittle_Strength</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Tc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">R_mpr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">g_surf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rhom</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rhoc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rhobar</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z_profile</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Te_HF_Conversion.CalcYSE_HF.Brittle_Strength" title="Link to this definition"></a></dt>
 <dd><p>Compute the Brittle strength of the lithosphere based on the
 approach of Mueller &amp; Phillips (1995).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p><ul class="simple">
 <li><p><strong>d_sig_tab1</strong> (<em>array size(depth)</em>) – Brittle yield strength envelope in compression (Pa).</p></li>
 <li><p><strong>d_sig_tab2</strong> (<em>array size(depth)</em>) – Brittle yield strength envelope in tension (Pa).</p></li>
 </ul>
 </p>
 </dd>
-<dt class="field-even">Parameters</dt>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
 <li><p><strong>Tc</strong> (<em>float</em>) – Crustal thickness (m).</p></li>
 <li><p><strong>R_mpr</strong> (<em>float</em>) – Mean radius of the body (m).</p></li>
@@ -123,11 +141,11 @@ approach of Mueller &amp; Phillips (1995).</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="Te_HF_Conversion.CalcYSE_HF.Conversion_Te_HF">
-<span class="sig-prename descclassname"><span class="pre">Te_HF_Conversion.CalcYSE_HF.</span></span><span class="sig-name descname"><span class="pre">Conversion_Te_HF</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Q_crust</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">A_crust</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_crust</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Q_mantle</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">A_mantle</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_mantle</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">g_surf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rhobar</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">R_mpr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Te</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Tc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k_crust</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k_mantle</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">K_curv</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">H_c</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rhoc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rhom</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">young</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">poisson</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sig_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Ts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">R_gas</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">HF_min</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">HF_max</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">HF_step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step_depth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_depth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quiet</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_YSE</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[6.4,</span> <span class="pre">4.8]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Te_HF_Conversion.CalcYSE_HF.Conversion_Te_HF" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">Te_HF_Conversion.CalcYSE_HF.</span></span><span class="sig-name descname"><span class="pre">Conversion_Te_HF</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Q_crust</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">A_crust</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_crust</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Q_mantle</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">A_mantle</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_mantle</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">g_surf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rhobar</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">R_mpr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Te</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Tc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k_crust</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k_mantle</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">K_curv</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">H_c</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rhoc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rhom</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">young</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">poisson</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sig_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Ts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">R_gas</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">HF_min</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">HF_max</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">HF_step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step_depth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_depth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quiet</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_YSE</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[6.4,</span> <span class="pre">4.8]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Te_HF_Conversion.CalcYSE_HF.Conversion_Te_HF" title="Link to this definition"></a></dt>
 <dd><p>Determine the surface, crustal, and mantle heat flows, mechanical thickness,
 and thermal gradients from input rheology and elastic parameters.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p><ul class="simple">
 <li><p><strong>F_c</strong> (<em>float</em>) – The crustal heat flow (mW m-2).</p></li>
 <li><p><strong>F_m</strong> (<em>float</em>) – The mantle heat flow (mW m-2).</p></li>
@@ -143,7 +161,7 @@ and thermal gradients from input rheology and elastic parameters.</p>
 </ul>
 </p>
 </dd>
-<dt class="field-even">Parameters</dt>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
 <li><p><strong>Q_crust</strong> (<em>float</em>) – Activation energy for the crust (J mol-1).</p></li>
 <li><p><strong>A_crust</strong> (<em>float</em>) – Empirical constant for the crust (Pa-n s-1).</p></li>
@@ -190,11 +208,11 @@ tested heat flows.</p></li>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="Te_HF_Conversion.CalcYSE_HF.Conversion_Tprofile_Te">
-<span class="sig-prename descclassname"><span class="pre">Te_HF_Conversion.CalcYSE_HF.</span></span><span class="sig-name descname"><span class="pre">Conversion_Tprofile_Te</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T_profile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z_profile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Q_crust</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">A_crust</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_crust</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Q_mantle</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">A_mantle</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_mantle</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">g_surf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rhobar</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">R_mpr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Tc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rhoc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rhom</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">young</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">poisson</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sig_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">R_gas</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">K_curv</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-07</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Te_min</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Te_max</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">300</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Te_step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quiet</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[6.4,</span> <span class="pre">4.8]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Te_HF_Conversion.CalcYSE_HF.Conversion_Tprofile_Te" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">Te_HF_Conversion.CalcYSE_HF.</span></span><span class="sig-name descname"><span class="pre">Conversion_Tprofile_Te</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T_profile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z_profile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Q_crust</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">A_crust</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_crust</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Q_mantle</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">A_mantle</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_mantle</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">g_surf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rhobar</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">R_mpr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Tc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rhoc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rhom</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">young</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">poisson</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sig_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">R_gas</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">K_curv</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-07</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Te_min</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Te_max</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">300</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Te_step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quiet</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[6.4,</span> <span class="pre">4.8]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Te_HF_Conversion.CalcYSE_HF.Conversion_Tprofile_Te" title="Link to this definition"></a></dt>
 <dd><p>Determine the elastic thicknesses from the input
 temperature profile and rheology.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p><ul class="simple">
 <li><p><strong>Te</strong> (<em>float</em>) – Elastic thickness of the lithosphere (m).</p></li>
 <li><p><strong>d_sig_tmp1_best</strong> (<em>array, size(max_depth / step_depth)</em>) – The best-fitting YSE compression (Pa).</p></li>
@@ -204,7 +222,7 @@ temperature profile and rheology.</p>
 </ul>
 </p>
 </dd>
-<dt class="field-even">Parameters</dt>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
 <li><p><strong>T_profile</strong> (<em>array</em><em>, </em><em>float</em>) – Temperature profile (K).</p></li>
 <li><p><strong>z_profile</strong> (<em>array</em><em>, </em><em>float</em>) – Depth (downward positive) associated with each temperature (m).
@@ -241,11 +259,11 @@ and temperature profile.</p></li>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="Te_HF_Conversion.CalcYSE_HF.Curv_Moment">
-<span class="sig-prename descclassname"><span class="pre">Te_HF_Conversion.CalcYSE_HF.</span></span><span class="sig-name descname"><span class="pre">Curv_Moment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d_sig_tmp0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d_sig_tmp1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">K_curv</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">young</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">poisson</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">depth</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step_depth</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sig_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">HF</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">neutralfib</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_YSE</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">decoupling</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[6.4,</span> <span class="pre">4.8]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Te_HF_Conversion.CalcYSE_HF.Curv_Moment" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">Te_HF_Conversion.CalcYSE_HF.</span></span><span class="sig-name descname"><span class="pre">Curv_Moment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d_sig_tmp0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d_sig_tmp1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">K_curv</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">young</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">poisson</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">depth</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step_depth</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sig_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">HF</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">neutralfib</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_YSE</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">decoupling</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[6.4,</span> <span class="pre">4.8]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Te_HF_Conversion.CalcYSE_HF.Curv_Moment" title="Link to this definition"></a></dt>
 <dd><p>Determine the bending moment given the input yield
 strength envelope and curvature.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p><ul class="simple">
 <li><p><strong>Mx</strong> (<em>float</em>) – The bending moment of the plate</p></li>
 <li><p><strong>d_sig_tab1</strong> (<em>array size(depth)</em>) – Integrated part of the yield strength envelope in compression (Pa)</p></li>
@@ -255,7 +273,7 @@ strength envelope and curvature.</p>
 </ul>
 </p>
 </dd>
-<dt class="field-even">Parameters</dt>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
 <li><p><strong>d_sig_tmp0</strong> (<em>float</em>) – Stress curve, tension (Pa).</p></li>
 <li><p><strong>d_sig_tmp1</strong> (<em>float</em>) – Stress curve, compression (Pa).</p></li>
@@ -279,14 +297,14 @@ ax if plot_YSE.</p></li>
 </dl>
 </dd></dl>
 
-</div>
-<div class="section" id="module-Te_HF_Conversion.Planet_constants">
-<span id="te-hf-conversion-planet-constants-module"></span><h2>Te_HF_Conversion.Planet_constants module<a class="headerlink" href="#module-Te_HF_Conversion.Planet_constants" title="Permalink to this headline"></a></h2>
-</div>
-<div class="section" id="module-Te_HF_Conversion">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-Te_HF_Conversion" title="Permalink to this headline"></a></h2>
-<div class="section" id="te-hf-conversion">
-<h3>Te_HF_Conversion<a class="headerlink" href="#te-hf-conversion" title="Permalink to this headline"></a></h3>
+</section>
+<section id="module-Te_HF_Conversion.Planet_constants">
+<span id="te-hf-conversion-planet-constants-module"></span><h2>Te_HF_Conversion.Planet_constants module<a class="headerlink" href="#module-Te_HF_Conversion.Planet_constants" title="Link to this heading"></a></h2>
+</section>
+<section id="module-Te_HF_Conversion">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-Te_HF_Conversion" title="Link to this heading"></a></h2>
+<section id="te-hf-conversion">
+<h3>Te_HF_Conversion<a class="headerlink" href="#te-hf-conversion" title="Link to this heading"></a></h3>
 <p>Te_HF_Conversion provides a function and an example script
 for converting a given elastic thickness of the lithosphere
 into a planetary heat flow, or a temperature profile
@@ -310,20 +328,21 @@ envelope based on planetary constants.</p>
 </dd>
 </dl>
 </div></blockquote>
+</section>
 <dl class="py function">
 <dt class="sig sig-object py" id="Te_HF_Conversion.Brittle_Strength">
-<span class="sig-prename descclassname"><span class="pre">Te_HF_Conversion.</span></span><span class="sig-name descname"><span class="pre">Brittle_Strength</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Tc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">R_mpr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">g_surf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rhom</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rhoc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rhobar</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z_profile</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Te_HF_Conversion.Brittle_Strength" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">Te_HF_Conversion.</span></span><span class="sig-name descname"><span class="pre">Brittle_Strength</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Tc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">R_mpr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">g_surf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rhom</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rhoc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rhobar</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z_profile</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Te_HF_Conversion.Brittle_Strength" title="Link to this definition"></a></dt>
 <dd><p>Compute the Brittle strength of the lithosphere based on the
 approach of Mueller &amp; Phillips (1995).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p><ul class="simple">
 <li><p><strong>d_sig_tab1</strong> (<em>array size(depth)</em>) – Brittle yield strength envelope in compression (Pa).</p></li>
 <li><p><strong>d_sig_tab2</strong> (<em>array size(depth)</em>) – Brittle yield strength envelope in tension (Pa).</p></li>
 </ul>
 </p>
 </dd>
-<dt class="field-even">Parameters</dt>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
 <li><p><strong>Tc</strong> (<em>float</em>) – Crustal thickness (m).</p></li>
 <li><p><strong>R_mpr</strong> (<em>float</em>) – Mean radius of the body (m).</p></li>
@@ -339,11 +358,11 @@ approach of Mueller &amp; Phillips (1995).</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="Te_HF_Conversion.Conversion_Te_HF">
-<span class="sig-prename descclassname"><span class="pre">Te_HF_Conversion.</span></span><span class="sig-name descname"><span class="pre">Conversion_Te_HF</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Q_crust</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">A_crust</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_crust</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Q_mantle</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">A_mantle</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_mantle</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">g_surf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rhobar</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">R_mpr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Te</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Tc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k_crust</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k_mantle</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">K_curv</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">H_c</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rhoc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rhom</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">young</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">poisson</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sig_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Ts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">R_gas</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">HF_min</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">HF_max</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">HF_step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step_depth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_depth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quiet</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_YSE</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[6.4,</span> <span class="pre">4.8]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Te_HF_Conversion.Conversion_Te_HF" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">Te_HF_Conversion.</span></span><span class="sig-name descname"><span class="pre">Conversion_Te_HF</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Q_crust</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">A_crust</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_crust</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Q_mantle</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">A_mantle</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_mantle</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">g_surf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rhobar</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">R_mpr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Te</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Tc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k_crust</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k_mantle</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">K_curv</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">H_c</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rhoc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rhom</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">young</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">poisson</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sig_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Ts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">R_gas</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">HF_min</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">HF_max</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">HF_step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step_depth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_depth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quiet</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_YSE</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[6.4,</span> <span class="pre">4.8]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Te_HF_Conversion.Conversion_Te_HF" title="Link to this definition"></a></dt>
 <dd><p>Determine the surface, crustal, and mantle heat flows, mechanical thickness,
 and thermal gradients from input rheology and elastic parameters.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p><ul class="simple">
 <li><p><strong>F_c</strong> (<em>float</em>) – The crustal heat flow (mW m-2).</p></li>
 <li><p><strong>F_m</strong> (<em>float</em>) – The mantle heat flow (mW m-2).</p></li>
@@ -359,7 +378,7 @@ and thermal gradients from input rheology and elastic parameters.</p>
 </ul>
 </p>
 </dd>
-<dt class="field-even">Parameters</dt>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
 <li><p><strong>Q_crust</strong> (<em>float</em>) – Activation energy for the crust (J mol-1).</p></li>
 <li><p><strong>A_crust</strong> (<em>float</em>) – Empirical constant for the crust (Pa-n s-1).</p></li>
@@ -406,11 +425,11 @@ tested heat flows.</p></li>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="Te_HF_Conversion.Conversion_Tprofile_Te">
-<span class="sig-prename descclassname"><span class="pre">Te_HF_Conversion.</span></span><span class="sig-name descname"><span class="pre">Conversion_Tprofile_Te</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T_profile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z_profile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Q_crust</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">A_crust</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_crust</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Q_mantle</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">A_mantle</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_mantle</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">g_surf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rhobar</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">R_mpr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Tc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rhoc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rhom</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">young</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">poisson</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sig_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">R_gas</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">K_curv</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-07</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Te_min</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Te_max</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">300</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Te_step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quiet</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[6.4,</span> <span class="pre">4.8]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Te_HF_Conversion.Conversion_Tprofile_Te" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">Te_HF_Conversion.</span></span><span class="sig-name descname"><span class="pre">Conversion_Tprofile_Te</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T_profile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z_profile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Q_crust</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">A_crust</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_crust</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Q_mantle</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">A_mantle</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_mantle</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">g_surf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rhobar</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">R_mpr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Tc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rhoc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rhom</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">young</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">poisson</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sig_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">R_gas</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">K_curv</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-07</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Te_min</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Te_max</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">300</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Te_step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quiet</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[6.4,</span> <span class="pre">4.8]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Te_HF_Conversion.Conversion_Tprofile_Te" title="Link to this definition"></a></dt>
 <dd><p>Determine the elastic thicknesses from the input
 temperature profile and rheology.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p><ul class="simple">
 <li><p><strong>Te</strong> (<em>float</em>) – Elastic thickness of the lithosphere (m).</p></li>
 <li><p><strong>d_sig_tmp1_best</strong> (<em>array, size(max_depth / step_depth)</em>) – The best-fitting YSE compression (Pa).</p></li>
@@ -420,7 +439,7 @@ temperature profile and rheology.</p>
 </ul>
 </p>
 </dd>
-<dt class="field-even">Parameters</dt>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
 <li><p><strong>T_profile</strong> (<em>array</em><em>, </em><em>float</em>) – Temperature profile (K).</p></li>
 <li><p><strong>z_profile</strong> (<em>array</em><em>, </em><em>float</em>) – Depth (downward positive) associated with each temperature (m).
@@ -457,11 +476,11 @@ and temperature profile.</p></li>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="Te_HF_Conversion.Curv_Moment">
-<span class="sig-prename descclassname"><span class="pre">Te_HF_Conversion.</span></span><span class="sig-name descname"><span class="pre">Curv_Moment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d_sig_tmp0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d_sig_tmp1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">K_curv</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">young</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">poisson</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">depth</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step_depth</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sig_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">HF</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">neutralfib</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_YSE</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">decoupling</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[6.4,</span> <span class="pre">4.8]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Te_HF_Conversion.Curv_Moment" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">Te_HF_Conversion.</span></span><span class="sig-name descname"><span class="pre">Curv_Moment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d_sig_tmp0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d_sig_tmp1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">K_curv</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">young</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">poisson</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">depth</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step_depth</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sig_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">HF</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">neutralfib</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_YSE</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">decoupling</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[6.4,</span> <span class="pre">4.8]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Te_HF_Conversion.Curv_Moment" title="Link to this definition"></a></dt>
 <dd><p>Determine the bending moment given the input yield
 strength envelope and curvature.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p><ul class="simple">
 <li><p><strong>Mx</strong> (<em>float</em>) – The bending moment of the plate</p></li>
 <li><p><strong>d_sig_tab1</strong> (<em>array size(depth)</em>) – Integrated part of the yield strength envelope in compression (Pa)</p></li>
@@ -471,7 +490,7 @@ strength envelope and curvature.</p>
 </ul>
 </p>
 </dd>
-<dt class="field-even">Parameters</dt>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
 <li><p><strong>d_sig_tmp0</strong> (<em>float</em>) – Stress curve, tension (Pa).</p></li>
 <li><p><strong>d_sig_tmp1</strong> (<em>float</em>) – Stress curve, compression (Pa).</p></li>
@@ -495,9 +514,8 @@ ax if plot_YSE.</p></li>
 </dl>
 </dd></dl>
 
-</div>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
