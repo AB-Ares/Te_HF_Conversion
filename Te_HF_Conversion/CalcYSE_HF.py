@@ -1021,7 +1021,7 @@ def Conversion_Tprofile_Te(
                     % (misfit, abs(M_real / M_el), Te / 1e3)
                 )
             misfit_temp = misfit
-            Te_best = Te - 1e3
+            Te_best = Te
             d_sig_tmp0_best = d_sig_tab[0, :].copy()
             d_sig_tmp1_best = d_sig_tab[1, :].copy()
             if decoupling:

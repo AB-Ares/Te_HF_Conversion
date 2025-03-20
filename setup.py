@@ -14,7 +14,7 @@ install_requires = ["numpy", "matplotlib"]
 
 setup(
     name="Te_HF_Conversion",
-    version="0.2.3",
+    version="0.2.4",
     description="Elastic thickness of the lithosphere, yield strength envelope, and heat flow calculations.",
     long_description=long_description,
     long_description_content_type="text/markdown",
