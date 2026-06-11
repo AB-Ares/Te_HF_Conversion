@@ -123,12 +123,12 @@ def Curv_Moment(
             f, ax = plt.subplots(1, 1, figsize=figsize)
         ax.plot(d_sig_tmp0, depth_km, "purple")
         ax.plot(d_sig_tmp1, depth_km, "k")
-        ax.plot(d_sig_tab1, depth_km, color="orange", label="Integrated tension")
-        ax.plot(d_sig_tab2, depth_km, "b", label="Integrated compression")
+        ax.plot(d1, depth_km, color="orange", label="Integrated tension")
+        ax.plot(d2, depth_km, "b", label="Integrated compression")
         ax.plot(sig_ela, depth_km, "--r", label="Curvature")
         if show:
             ax.set_xlim(
-                1.5 * np.min([d_sig_tmp1.min(), d_sig_tab2.min()]),
+                1.5 * np.min([d_sig_tmp1.min(), d2.min()]),
                 1.5 * np.max([d_sig_tmp0.max(), d_sig_tmp1.max()]),
             )
             ax.axvline(sig_y, label="Bounding stress")
