@@ -374,6 +374,7 @@ def Conversion_Te_HF(
     prints_weak = False
     prints_decoup = False
     prints_decoup_m = False
+    best_found = False
 
     d_sig_tab0B, d_sig_tab1B = Brittle_Strength(
         Tc, R_mpr, g_surf, rhom, rhoc, rhobar, depths_arr
@@ -583,11 +584,15 @@ def Conversion_Te_HF(
                 d_sig_tab2_best = d_sig_tab2
             T_z_best = T_z
         else:
+            best_found = True
             if not quiet:
                 print(
                     " YSE misfit is worse %.2f, M_real/M_el %.2f, crust, mantle, and surface heat flows (mW m-2) %.2f, %.2f, %.2f "
                     % (misfit, abs(M_real / M_el), (Fs - F) * 1e3, F * 1e3, Fs * 1e3)
                 )
+
+    if not best_found:
+        raise ValueError(" Couldn't find the best-fit heat flux. Consider inputing/changing HF_min (%i) and HF_max (%i) " %(HF_min, HF_max))
 
     # Mechanical thickness of the lithosphere
     find_Tm = np.where(np.logical_and(abs(d_sig_tmp0_best) <= sig_y, depths_arr > Te))
