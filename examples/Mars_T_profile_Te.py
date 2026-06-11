@@ -23,18 +23,18 @@ Tc = 50e3  # crustal thickness (m)
 eps = 1e-16  # strain rate (s-1)
 
 max_depth = 200  # Maximum depth investigated (km)
-step_depth = 0.1  # Depth steps (km)
+step_depth = 0.05  # Depth steps (km)
 thermal_gradient = 10  # Thermal gradient (K / km)
 z_profile = np.arange(0, max_depth, step=step_depth) * 1e3  # to meters
 T_profile = 210 + z_profile * thermal_gradient / 1e3
 
 # An example temperature profile with a thermal anomaly
-depth_anomaly = 20  # depth of the thermal anomaly (km)
+depth_anomaly = 5  # depth of the thermal anomaly (km)
 thickness_anomaly = 30  # Thickness of the thermal anomaly (km)
 max_incre = int(
     np.min([thickness_anomaly - 1, max_depth - thickness_anomaly]) / step_depth
 )
-dT = 350  # Temperature contrast of the thermal anomaly
+dT = 550  # Temperature contrast of the thermal anomaly
 T_profile[
     int(depth_anomaly / step_depth) : int(depth_anomaly / step_depth) + max_incre
 ] += (np.cos(np.linspace(-np.pi / 2.0, np.pi / 2.0, max_incre)) * dT)
@@ -46,7 +46,7 @@ Te_max = 40
 plot = True  # Plot the final yield strength envelope and associated temperature profile
 
 # More input parameters can be input to increase speed (see doc)
-kwargs = dict(quiet=False, plot=plot, Te_min=Te_min, Te_max=Te_max)
+kwargs = dict(quiet=True, plot=plot, Te_min=Te_min, Te_max=Te_max)
 
 Conversion_Tprofile_Te(
     T_profile,

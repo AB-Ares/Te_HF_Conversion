@@ -18,3 +18,15 @@ Venus
 
 ``Venus_YSE.py``
     A script that determines the surface, crust, and mantle heat flows given the input rheology and elastic thickness on Venus. Radiogenic heating can be included, and it is possible to plot the yield strength envelope and temperature profile.
+
+Moon
+------
+
+``Moon_YSE.py``
+    A script that determines the surface, crust, and mantle heat flows given the input rheology and elastic thickness on the Moon. Radiogenic heating can be included, and it is possible to plot the yield strength envelope and temperature profile.
+
+Mercury
+------
+
+``Mercury_YSE.py``
+    A script that determines the surface, crust, and mantle heat flows given the input rheology and elastic thickness on Mercury. Radiogenic heating can be included, and it is possible to plot the yield strength envelope and temperature profile.

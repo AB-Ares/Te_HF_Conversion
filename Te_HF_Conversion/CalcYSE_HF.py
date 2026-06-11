@@ -9,6 +9,7 @@ thickness.
 import numpy as np
 import matplotlib as mpl
 import matplotlib.pyplot as plt
+from scipy.optimize import brentq
 
 
 def Curv_Moment(
@@ -81,60 +82,40 @@ def Curv_Moment(
        Size of the output figure.
     """
 
-    first = False
-    if neutralfib is None:
-        for i in depth:
-            # Find neutral fiber
-            sig_ela = (-young * K_curv * (depth - i)) / (1.0 - poisson**2)
-            d_sig_tab1 = np.minimum(sig_ela[:], d_sig_tmp0[:])
-            d_sig_tab2 = np.maximum(sig_ela[:], d_sig_tmp1[:])
-            if K_curv >= 0:
-                # elastic core limit & neutral fiber
-                bound2 = np.min(np.where(sig_ela == 0))
-                d_sig_tab1[bound2:] = 0.0
-                d_sig_tab2[:bound2] = 0.0
-
-                NetAxial = np.trapz(d_sig_tab1[:bound2], dx=step_depth) + np.trapz(
-                    d_sig_tab2[bound2:], dx=step_depth
-                )
-            else:
-                # elastic core limit & neutral fiber
-                bound2 = np.min(np.where(sig_ela == 0))
-                d_sig_tab1[:bound2] = 0.0
-                d_sig_tab2[bound2:] = 0.0
-
-                NetAxial = np.trapz(d_sig_tab2[:bound2], dx=step_depth) + np.trapz(
-                    d_sig_tab1[bound2:], dx=step_depth
-                )
-
-            if not first and NetAxial != 0:
-                tempAx = NetAxial
-                first = True
-            if first and tempAx < 0 and NetAxial > 0:
-                neutralfib = i
-                break
-            elif first and tempAx > 0 and NetAxial < 0:
-                neutralfib = i
-                break
-    else:
+    def net_axial(neutralfib):
         sig_ela = (-young * K_curv * (depth - neutralfib)) / (1.0 - poisson**2)
-        d_sig_tab1 = np.minimum(sig_ela[:], d_sig_tmp0[:])
-        d_sig_tab2 = np.maximum(sig_ela[:], d_sig_tmp1[:])
+
+        d1 = np.minimum(sig_ela, d_sig_tmp0)
+        d2 = np.maximum(sig_ela, d_sig_tmp1)
+
+        mask = depth < neutralfib
+
         if K_curv >= 0:
-            # elastic core limit & neutral fiber
-            bound2 = np.min(np.where(sig_ela == 0))
-            d_sig_tab1[bound2:] = 0.0
-            d_sig_tab2[:bound2] = 0.0
+            return np.trapezoid(d1[mask], dx=step_depth) + np.trapezoid(
+                d2[~mask], dx=step_depth
+            )
         else:
-            # elastic core limit & neutral fiber
-            bound2 = np.min(np.where(sig_ela == 0))
-            d_sig_tab1[:bound2] = 0.0
-            d_sig_tab2[bound2:] = 0.0
+            return np.trapezoid(d2[mask], dx=step_depth) + np.trapezoid(
+                d1[~mask], dx=step_depth
+            )
 
-    d_sig_tab3 = d_sig_tab1 * (depth - neutralfib / 2.0)
-    d_sig_tab4 = d_sig_tab2 * (depth - neutralfib / 2.0)
+    # solve for neutral fiber
+    neutralfib = brentq(net_axial, depth[0], depth[-1], xtol=(depth[5] - depth[4]) / 2)
+    sig_ela = (-young * K_curv * (depth - neutralfib)) / (1.0 - poisson**2)
+    d1 = np.minimum(sig_ela, d_sig_tmp0)
+    d2 = np.maximum(sig_ela, d_sig_tmp1)
 
-    Mx = np.trapz(d_sig_tab3, dx=step_depth) + np.trapz(d_sig_tab4, dx=step_depth)
+    idx = np.searchsorted(depth, neutralfib)
+    if K_curv >= 0:
+        d1[idx:] = 0.0
+        d2[:idx] = 0.0
+    else:
+        d1[:idx] = 0.0
+        d2[idx:] = 0.0
+
+    Mx = np.trapezoid(d1 * (depth - neutralfib), dx=step_depth) + np.trapezoid(
+        d2 * (depth - neutralfib), dx=step_depth
+    )
 
     if plot_YSE:  # Show YSE
         depth_km = depth / 1e3
@@ -160,7 +141,7 @@ def Curv_Moment(
                 ax.set_title("Mantle heat flow %s (mW m-2)" % (HF * 1e3))
             plt.show()
 
-    return Mx, d_sig_tab1, d_sig_tab2, sig_ela, neutralfib
+    return Mx, d1, d2, sig_ela, neutralfib
 
 
 def Conversion_Te_HF(
@@ -217,6 +198,8 @@ def Conversion_Te_HF(
        The surface temperature gradient (K km-1).
     Tm : Float
        Mechanical thickness of the lithosphere (m).
+    depth_arr : array, size(max_depth / step_depth)
+        Depth array (m)
     d_sig_tmp1_best : array, size(max_depth / step_depth)
        The best-fitting YSE compression (Pa).
     d_sig_tmp0_best : array, size(max_depth / step_depth)
@@ -316,7 +299,7 @@ def Conversion_Te_HF(
     # First order heat flow calculation
     # Valid when the curvature is low, about 1e-9 (see McNutt 1984)
     # Doesn't account for a potential decoupling between the crust and mantle,
-    # which can vary the elastic thickness by about 30%, hence the derived heat flow
+    # which can affect the elastic thickness by about 30%, hence the derived heat flow
     k_avg = (k_mantle * (Te - Tc) + k_crust * Tc) / Te  # Linear avg
     if Te > Tc:  # Mantle rheology
         Tmax = (Q_mantle / R_gas) / (np.log(A_mantle * (sig_y**n_mantle) / eps))
@@ -356,24 +339,17 @@ def Conversion_Te_HF(
     depths_arr = np.array(range(1, int(max_depth), step_depth))
 
     d_sig_tab = np.zeros((3, np.size(depths_arr)))
-    T_z_tab = np.zeros_like(depths_arr)
 
     # Integration of the elastic strength of the lithosphere
-    d_sig_tab[2, :] = -(K_curv * young) / float(1.0 - poisson**2)  # Pa
-    a = -1
-    for j in depths_arr:
-        a = a + 1
-        d_sig_tab[2, a] = (
-            -d_sig_tab[2, a] * (j - float(Te) / 2.0) ** 2
-        )  # To integrate the elastic strength
-        if j > Te:
-            bound4 = a
-            break
-    M_el = np.trapz(
-        d_sig_tab[2, :bound4], dx=step_depth
-    )  # The analytic formula for M_el is not used here.
+    d_sig_tab[2, :] = ((K_curv * young) / float(1.0 - poisson**2)) * (
+        (depths_arr - Te / 2.0) ** 2
+    )
+    bound4 = np.searchsorted(depths_arr, Te, side="right")
+
+    # The analytic formula for M_el is not used here.
     # as we use trapz for M_real, we use it to compute M_el
     # but in practice M_el integrated and the analytic formula are close
+    M_el = np.trapezoid(d_sig_tab[2, :bound4], dx=step_depth)
     M_el_analyt = K_curv * young * Te**3 / (12.0 * float(1.0 - poisson**2))
     if not quiet:
         print(
@@ -382,7 +358,8 @@ def Conversion_Te_HF(
             "%.4e" % (M_el_analyt),
         )
 
-    if np.abs(M_el - M_el_analyt) / M_el_analyt > 5e2:
+    # If integration accuracy is less than 5%, ask to change step sizes
+    if np.abs(M_el - M_el_analyt) / M_el_analyt > 0.05:
         raise ValueError(
             "The difference between the integrated elastic moment"
             + " and analytical is too large (%s)"
@@ -408,48 +385,52 @@ def Conversion_Te_HF(
         duct_fail_c = False
         duct_fail_m = False
         F = float(HF / 1e3)
-        for iter, z in enumerate(depths_arr):
-            # Ductile
-            # Temperature
-            if z <= Tc:
-                Fs = F + rhoc * H_c * z
-                T_z = Ts + Fs * z / k_crust - rhoc * H_c * z**2 / (2 * k_crust)
 
-                # Onset of ductile deformation
-                ductile_sig = (eps / A_crust) ** (1.0 / float(n_crust)) * np.exp(
-                    Q_crust / (n_crust * R_gas * T_z)
-                )
-                d_sig_tab[0, iter] = min(ductile_sig, d_sig_tab[0, iter])
-                d_sig_tab[1, iter] = -min(ductile_sig, abs(d_sig_tab[1, iter]))
+        # constants for the analytical solution of the heat diffusion equation
+        # (Schubert et al., 2001)
+        const_c1 = (F / k_crust - (rhoc * H_c * (R_mpr - Tc)) / (3.0 * k_crust)) * (
+            R_mpr - Tc
+        ) ** 2
+        const_c2 = Ts + (rhoc * H_c * R_mpr**2) / (6.0 * k_crust) - const_c1 / R_mpr
+        const_c1_mantle = F * (R_mpr - Tc) ** 2 / k_mantle
 
-                # Crustal ductile failure
-                if (
-                    d_sig_tab[0, iter] == ductile_sig
-                    or d_sig_tab[1, iter] == -ductile_sig
-                ) and not duct_fail_c:
-                    duct_fail_c = True
-                    i_duct_c = iter
-                    i_crust_thick = np.argmin((depths_arr - Tc) ** 2)
-            else:
-                T_z_c = Ts + Fs * Tc / k_crust - rhoc * H_c * Tc**2 / (2 * k_crust)
-                T_z = T_z_c + F / k_mantle * (z - Tc)
+        mantle_mask = depths_arr > Tc
+        # Crust
+        T_z = (
+            (-rhoc * H_c * (R_mpr - depths_arr) ** 2) / (6.0 * k_crust)
+            + const_c1 / (R_mpr - depths_arr)
+            + const_c2
+        )
+        ductile_sig = (eps / A_crust) ** (1.0 / n_crust) * np.exp(
+            Q_crust / (n_crust * R_gas * T_z)
+        )
 
-                # Onset of ductile deformation
-                ductile_sig = (eps / A_mantle) ** (1.0 / float(n_mantle)) * np.exp(
-                    Q_mantle / (n_mantle * R_gas * T_z)
-                )
-                d_sig_tab[0, iter] = min(ductile_sig, d_sig_tab[0, iter])
-                d_sig_tab[1, iter] = -min(ductile_sig, abs(d_sig_tab[1, iter]))
+        # Mantle
+        Fs = F + rhoc * H_c * Tc
+        T_z_c = Ts + Fs * Tc / k_crust - rhoc * H_c * Tc**2 / (2.0 * k_crust)
+        T_z[mantle_mask] = T_z_c + const_c1_mantle * (
+            1.0 / (R_mpr - depths_arr[mantle_mask]) - 1.0 / (R_mpr - Tc)
+        )
+        ductile_sig[mantle_mask] = (eps / A_mantle) ** (1.0 / n_mantle) * np.exp(
+            Q_mantle / (n_mantle * R_gas * T_z[mantle_mask])
+        )
 
-                # Mantle ductile failure
-                if (
-                    d_sig_tab[0, iter] == ductile_sig
-                    or d_sig_tab[1, iter] == -ductile_sig
-                ) and not duct_fail_m:
-                    duct_fail_m = True
-                    i_duct_m = iter
+        # Min between brittle and ductile
+        d_sig_tab[0] = np.minimum(ductile_sig, d_sig_tab[0])
+        d_sig_tab[1] = -np.minimum(ductile_sig, np.abs(d_sig_tab[1]))
 
-            T_z_tab[iter] = T_z
+        failed = (d_sig_tab[0] == ductile_sig) | (d_sig_tab[1] == -ductile_sig)
+        crust_failed = failed & ~mantle_mask
+        mantle_failed = failed & mantle_mask
+
+        if not duct_fail_c and np.any(crust_failed):
+            duct_fail_c = True
+            i_duct_c = np.argmax(crust_failed)
+            i_crust_thick = np.searchsorted(depths_arr, Tc)
+
+        if not duct_fail_m and np.any(mantle_failed):
+            duct_fail_m = True
+            i_duct_m = np.argmax(mantle_failed)
 
         # Bounding stress limit
         if duct_fail_m:
@@ -516,9 +497,12 @@ def Conversion_Te_HF(
                 ax = None
 
             args_M_real = (K_curv, young, poisson, depths_arr, step_depth, sig_y)
-            args_M_real_d = dict(
-                plot_YSE=plot_YSE, HF=F, decoupling=decoupling_potential, ax=ax
-            )
+            args_M_real_d = {
+                "plot_YSE": plot_YSE,
+                "HF": F,
+                "decoupling": decoupling_potential,
+                "ax": ax,
+            }
 
             if sum_d0_m and sum_d1_m:
                 M_real_m, d_sig_tab1_m, d_sig_tab2_m, sig_ela_m, _ = Curv_Moment(
@@ -597,7 +581,7 @@ def Conversion_Te_HF(
                 decoupling_better = False
                 d_sig_tab1_best = d_sig_tab1
                 d_sig_tab2_best = d_sig_tab2
-            T_z_best = T_z_tab
+            T_z_best = T_z
         else:
             if not quiet:
                 print(
@@ -613,15 +597,13 @@ def Conversion_Te_HF(
             + "User should increase the max_depth parameter, value is: %i km"
             % (max_depth / 1e3)
         )
+
+    if decoupling_better:
+        Tm1 = depths_arr[find_Tm][0]
+        Tm2 = depths_arr[i_duct_m_best:][depth_m0_best][0] - depths_arr[i_duct_m_best]
+        Tm = (Tm1**3 + Tm2**3) ** (1 / 3)  # Burov & Diament 1995
     else:
-        if decoupling_better:
-            Tm1 = depths_arr[find_Tm][0]
-            Tm2 = (
-                depths_arr[i_duct_m_best:][depth_m0_best][0] - depths_arr[i_duct_m_best]
-            )
-            Tm = (Tm1**3 + Tm2**3) ** (1 / 3)  # Burov & Diament 1995
-        else:
-            Tm = depths_arr[find_Tm][0]
+        Tm = depths_arr[find_Tm][0]
     F_c_best = F_s_best - F_m_best
 
     if not quiet:
@@ -632,7 +614,7 @@ def Conversion_Te_HF(
         print("Mechanical thickness of the lithosphere (km) %i" % (Tm / 1e3))
 
     if plot:
-        fig, (ax1, ax2) = plt.subplots(1, 2, figsize=figsize)
+        _, (ax1, ax2) = plt.subplots(1, 2, figsize=figsize)
         depth_km = depths_arr / 1e3
         ax1.plot(d_sig_tmp0_best, depth_km, "purple")
         ax1.plot(d_sig_tmp1_best, depth_km, "k")
@@ -685,6 +667,7 @@ def Conversion_Te_HF(
         F_m_best / k_mantle,
         F_s_best / k_avg,
         Tm,
+        depths_arr,
         d_sig_tmp1_best,
         d_sig_tmp0_best,
         ax1,
@@ -721,13 +704,15 @@ def Conversion_Tprofile_Te(
     figsize=mpl.rcParams["figure.figsize"],
 ):
     """
-    Determine the elastic thicknesses from the input
-    temperature profile and rheology.
+    Determine the elastic & mechanical thicknesses from
+    the input temperature profile and rheology.
 
     Returns
     -------
     Te : float
        Elastic thickness of the lithosphere (m).
+    Tm : float
+        Mechanical thickness of the lithosphere (m)
     d_sig_tmp1_best : array, size(max_depth / step_depth)
        The best-fitting YSE compression (Pa).
     d_sig_tmp0_best : array, size(max_depth / step_depth)
@@ -833,46 +818,38 @@ def Conversion_Tprofile_Te(
     prints_decoup = False
     duct_fail_c = False
     duct_fail_m = False
-    i_crust_thick = np.argmin((z_profile - Tc) ** 2)
+    i_crust_thick = np.searchsorted(z_profile, Tc)
 
     # Brittle Strength
     d_sig_tab[0, :], d_sig_tab[1, :] = Brittle_Strength(
         Tc, R_mpr, g_surf, rhom, rhoc, rhobar, z_profile
     )
 
-    # Ductile Strength & Decoupling
-    for z, T, iter in zip(z_profile, T_profile, range(len(T_profile))):
-        # Ductile
-        # Temperature
-        if z <= Tc:
-            # Onset of ductile deformation
-            ductile_sig = (eps / A_crust) ** (1.0 / float(n_crust)) * np.exp(
-                Q_crust / (n_crust * R_gas * T)
-            )
-            d_sig_tab[0, iter] = min(ductile_sig, d_sig_tab[0, iter])
-            d_sig_tab[1, iter] = -min(ductile_sig, abs(d_sig_tab[1, iter]))
+    mantle_mask = z_profile > Tc
+    ductile_sig = (eps / A_crust) ** (1.0 / n_crust) * np.exp(
+        Q_crust / (n_crust * R_gas * T_profile)
+    )
 
-            # Crustal ductile failure
-            if (
-                d_sig_tab[0, iter] == ductile_sig or d_sig_tab[1, iter] == -ductile_sig
-            ) and not duct_fail_c:
-                duct_fail_c = True
-                i_duct_c = iter
-        else:
+    # Mantle
+    ductile_sig[mantle_mask] = (eps / A_mantle) ** (1.0 / n_mantle) * np.exp(
+        Q_mantle / (n_mantle * R_gas * T_profile[mantle_mask])
+    )
 
-            # Onset of ductile deformation
-            ductile_sig = (eps / A_mantle) ** (1.0 / float(n_mantle)) * np.exp(
-                Q_mantle / (n_mantle * R_gas * T)
-            )
-            d_sig_tab[0, iter] = min(ductile_sig, d_sig_tab[0, iter])
-            d_sig_tab[1, iter] = -min(ductile_sig, abs(d_sig_tab[1, iter]))
+    # Min between brittle and ductile
+    d_sig_tab[0] = np.minimum(ductile_sig, d_sig_tab[0])
+    d_sig_tab[1] = -np.minimum(ductile_sig, np.abs(d_sig_tab[1]))
 
-            # Mantle ductile failure
-            if (
-                d_sig_tab[0, iter] == ductile_sig or d_sig_tab[1, iter] == -ductile_sig
-            ) and not duct_fail_m:
-                duct_fail_m = True
-                i_duct_m = iter
+    failed = (d_sig_tab[0] == ductile_sig) | (d_sig_tab[1] == -ductile_sig)
+    crust_failed = failed & ~mantle_mask
+    mantle_failed = failed & mantle_mask
+
+    if not duct_fail_c and np.any(crust_failed):
+        duct_fail_c = True
+        i_duct_c = np.argmax(crust_failed)
+
+    if not duct_fail_m and np.any(mantle_failed):
+        duct_fail_m = True
+        i_duct_m = np.argmax(mantle_failed)
 
     # Bounding stress limit
     if duct_fail_m:
@@ -929,22 +906,22 @@ def Conversion_Tprofile_Te(
         d_sig_tab2_decoup = np.zeros_like(d_sig_tab[0, :])
         i_decoup = []
         i_recoup = []
-        for iter in range(len(z_profile)):
-            if iter < i_duct:
+        for idx in range(len(z_profile)):
+            if idx < i_duct:
                 continue
             if (
-                abs(d_sig_tab[0, iter]) < sig_y or abs(d_sig_tab[1, iter]) < sig_y
+                abs(d_sig_tab[0, idx]) < sig_y or abs(d_sig_tab[1, idx]) < sig_y
             ) and not decoup:
                 d_sig_tab_tmp0 = d_sig_tab[0, :].copy()
                 d_sig_tab_tmp1 = d_sig_tab[1, :].copy()
                 if decoup_first:
-                    d_sig_tab_tmp0[iter:] = 0.0
-                    d_sig_tab_tmp1[iter:] = 0.0
+                    d_sig_tab_tmp0[idx:] = 0.0
+                    d_sig_tab_tmp1[idx:] = 0.0
                 else:
                     d_sig_tab_tmp0[: i_recoup[-1]] = 0.0
                     d_sig_tab_tmp1[: i_recoup[-1]] = 0.0
-                    d_sig_tab_tmp0[iter:] = 0.0
-                    d_sig_tab_tmp1[iter:] = 0.0
+                    d_sig_tab_tmp0[idx:] = 0.0
+                    d_sig_tab_tmp1[idx:] = 0.0
                 decoup = True
                 (
                     M_real_tmp,
@@ -961,7 +938,7 @@ def Conversion_Tprofile_Te(
                     decoup_first = False
                 else:
                     sig_ela_decoup = np.column_stack((sig_ela_decoup, sig_ela_tmp))
-                i_decoup.append(iter)
+                i_decoup.append(idx)
                 if not prints_decoup:
                     decoupling = True
                     prints_decoup = True
@@ -971,27 +948,21 @@ def Conversion_Tprofile_Te(
                         )
             elif (
                 decoup
-                and abs(d_sig_tab[0, iter]) > sig_y
-                and abs(d_sig_tab[1, iter]) > sig_y
+                and abs(d_sig_tab[0, idx]) > sig_y
+                and abs(d_sig_tab[1, idx]) > sig_y
             ):
                 decoup = False
-                i_recoup.append(iter)
+                i_recoup.append(idx)
 
     for Te in (
         np.arange(Te_min, np.min([Te_max, max_depth]), step=Te_step) * 1e3
     ):  # Convert to m
         # Integration of the elastic strength of the lithosphere
-        d_sig_tab[2, :] = -(K_curv * young) / float(1.0 - poisson**2)  # Pa
-        a = -1
-        for j in z_profile:
-            a = a + 1
-            d_sig_tab[2, a] = (
-                -d_sig_tab[2, a] * (j - float(Te) / 2.0) ** 2
-            )  # To integrate the elastic strength
-            if j > Te:
-                bound4 = a
-                break
-        M_el = np.trapz(
+        d_sig_tab[2, :] = ((K_curv * young) / float(1.0 - poisson**2)) * (
+            (z_profile - Te / 2.0) ** 2
+        )
+        bound4 = np.searchsorted(z_profile, Te, side="right")
+        M_el = np.trapezoid(
             d_sig_tab[2, :bound4], dx=step_depth
         )  # The analytic formula for M_el is not used here.
         # as we use trapz for M_real, we use it to compute M_el
@@ -1045,20 +1016,18 @@ def Conversion_Tprofile_Te(
                     + "User should increase the max_depth parameter, value is: %i km"
                     % (max_depth)
                 )
+
+            if decoupling_better:
+                Tm1 = 0
+                for ind, i_d in enumerate(i_decoup_best):
+                    if ind == 0:
+                        Tm2 = z_profile[i_d] ** 3
+                    else:
+                        Tm2 = (z_profile[i_d] - z_profile[i_recoup_best[ind - 1]]) ** 3
+                    Tm1 += Tm2  # Burov & Diament 1995
+                Tm = Tm1 ** (1 / 3)
             else:
-                if decoupling_better:
-                    Tm1 = 0
-                    for ind, i_d in enumerate(i_decoup_best):
-                        if ind == 0:
-                            Tm2 = z_profile[i_d] ** 3
-                        else:
-                            Tm2 = (
-                                z_profile[i_d] - z_profile[i_recoup_best[ind - 1]]
-                            ) ** 3
-                        Tm1 += Tm2  # Burov & Diament 1995
-                    Tm = Tm1 ** (1 / 3)
-                else:
-                    Tm = z_profile[find_Tm][0]
+                Tm = z_profile[find_Tm][0]
 
         else:
             if not quiet:
@@ -1071,7 +1040,7 @@ def Conversion_Tprofile_Te(
         print("Best-fit elastic thickness (km) %.2f " % (Te_best / 1e3))
 
     if plot:
-        fig, (ax1, ax2) = plt.subplots(1, 2, figsize=figsize)
+        _, (ax1, ax2) = plt.subplots(1, 2, figsize=figsize)
         depth_km = z_profile / 1e3
         ax1.plot(d_sig_tmp0_best, depth_km, "purple")
         ax1.plot(d_sig_tmp1_best, depth_km, "k")
@@ -1123,11 +1092,10 @@ def Conversion_Tprofile_Te(
         ax1 = None
         ax2 = None
 
-    return (Te_best, d_sig_tmp1_best, d_sig_tmp0_best, ax1, ax2)
+    return (Te_best, Tm, d_sig_tmp1_best, d_sig_tmp0_best, ax1, ax2)
 
 
 def Brittle_Strength(Tc, R_mpr, g_surf, rhom, rhoc, rhobar, z_profile):
-
     """
     Compute the Brittle strength of the lithosphere based on the
     approach of Mueller & Phillips (1995).
@@ -1165,9 +1133,8 @@ def Brittle_Strength(Tc, R_mpr, g_surf, rhom, rhoc, rhobar, z_profile):
     )
 
     z_crust_ix = z_profile <= Tc
-    z_mantle_idx = z_profile > Tc
     z_crust = z_profile[z_crust_ix]
-    z_mantle = z_profile[z_mantle_idx]
+    z_mantle = z_profile[~z_crust_ix]
 
     g_depth = np.hstack(
         (
@@ -1184,7 +1151,7 @@ def Brittle_Strength(Tc, R_mpr, g_surf, rhom, rhoc, rhobar, z_profile):
         np.hstack(
             (
                 rhoc * g_depth[z_crust_ix] * z_crust,  # crust
-                rhoc * g_crust * Tc + rhom * g_depth[z_mantle_idx] * (z_mantle - Tc),
+                rhoc * g_crust * Tc + rhom * g_depth[~z_crust_ix] * (z_mantle - Tc),
             )  # mantle
         )
         * 1e-6

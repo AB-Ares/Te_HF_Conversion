@@ -58,3 +58,27 @@ Venus_mass = Venus_gm / G_cst
 Venus_g0 = Venus_gm / Venus_mpr**2
 # Average density (kg m-3)
 Venus_density = Venus_mass * 3.0 / 4.0 / np.pi / (Venus_mpr**3)
+
+# Moon constants
+# gm (m3 s-2) – Williams et al. (2014)
+Moon_gm = 4902.80007e9
+# Mean planetary radius (m) – LOLA2600p: Wieczorek, M. A. (2015)
+Moon_mpr = 1737151.0
+# Mass (kg)
+Moon_mass = Moon_gm / G_cst
+# Gravitational attraction (m s-2)
+Moon_g0 = Moon_gm / Moon_mpr**2
+# Average density (kg m-3)
+Moon_density = Moon_mass * 3.0 / 4.0 / np.pi / (Moon_mpr**3)
+
+# Mercury constants
+# gm (m3 s-2) – JGMESS160A: Konopliv et al. (2020)
+Mercury_gm = 22031868691090.8
+# Mean planetary radius (m) – GTMES150: Neumann (2016)
+Mercury_mpr = 2439401.97456433
+# Mass (kg)
+Mercury_mass = Mercury_gm / G_cst
+# Gravitational attraction (m s-2)
+Mercury_g0 = Mercury_gm / Mercury_mpr**2
+# Average density (kg m-3)
+Mercury_density = Mercury_mass * 3.0 / 4.0 / np.pi / (Moon_mpr**3)
